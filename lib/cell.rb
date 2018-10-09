@@ -1,11 +1,11 @@
 class Cell
-	attr_reader :symbol
+	attr_reader :player
 
-	def setMarker(symbol_str)
-		@symbol = symbol_str
+	def setPlayer(player_number)
+		@player = player_number
 	end
 
 	def empty?()
-		symbol == nil
+		player == nil
 	end
 end

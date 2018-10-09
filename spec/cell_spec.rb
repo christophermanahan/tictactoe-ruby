@@ -3,21 +3,21 @@ require "./lib/cell.rb"
 describe "cell" do
 	let (:cell) { cell = Cell.new }
 
-	it "Is initialized with symbol set to nil" do
-		expect(cell.symbol).to eq nil
+	it "Is initialized with player set to nil" do
+		expect(cell.player).to eq nil
 	end
 
-	it "Is initialized with empty? set to true" do
+	it "Is initialized with empty? returning true" do
 		expect(cell.empty?).to eq true
 	end
 
-	it "Sets the symbol to the provided value using setMarker" do
-		cell.setMarker("X")
-		expect(cell.symbol).to eq "X"
+	it "Sets the player to the provided player number using setPlayer" do
+		cell.setPlayer(0)
+		expect(cell.player).to eq 0
 	end
 
-	it "Returns false from empty? after a symbol is set" do
-		cell.setMarker("X")
+	it "Returns false from empty? after a player is set" do
+		cell.setPlayer(0)
 		expect(cell.empty?).to eq false
 	end
 end
