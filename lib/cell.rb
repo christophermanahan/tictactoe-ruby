@@ -1,8 +1,8 @@
 class Cell
 	attr_reader :player
 
-	def setPlayer(player_number)
-		@player = player_number
+	def set_player(player)
+		@player = player
 	end
 
 	def empty?()

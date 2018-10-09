@@ -13,10 +13,10 @@ describe "board" do
 		expect(board.cells).to all(be_a(Cell))
 	end
 
-	it "Has a method setPlayer that invokes the setPlayer method on a cell at coordinate with provided number" do
+	it "Has a method set_player that invokes the setPlayer method on a cell at coordinate with provided number" do
 		coordinate = Coordinate.new(0)
-		targetCell = board.cells[coordinate.position]
-		expect(targetCell).to receive(:setPlayer)
-		board.setPlayer(0, coordinate)
+		target_cell = board.cells[coordinate.position]
+		expect(target_cell).to receive(:set_player)
+		board.set_player(0, coordinate)
 	end
 end
