@@ -1,5 +1,9 @@
 class Cell
-	attr_accessor :symbol
+	attr_reader :symbol
+
+	def setMarker(symbol_str)
+		@symbol = symbol_str
+	end
 
 	def empty?()
 		symbol == nil

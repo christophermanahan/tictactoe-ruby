@@ -1,7 +1,7 @@
 class Coordinate
 	attr_reader :position
 
-	def initialize(integer)
-		@position = integer
+	def initialize(position_int)
+		@position = position_int
 	end
 end

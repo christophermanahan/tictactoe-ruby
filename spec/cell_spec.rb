@@ -11,13 +11,13 @@ describe "cell" do
 		expect(cell.empty?).to eq true
 	end
 
-	it "Sets the symbol to the provided value" do
-		cell.symbol = "X"
+	it "Sets the symbol to the provided value using setMarker" do
+		cell.setMarker("X")
 		expect(cell.symbol).to eq "X"
 	end
 
 	it "Returns false from empty? after a symbol is set" do
-		cell.symbol = "X"
+		cell.setMarker("X")
 		expect(cell.empty?).to eq false
 	end
 end
