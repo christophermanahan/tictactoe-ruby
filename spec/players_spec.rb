@@ -21,6 +21,6 @@ describe "players" do
 	it "Has a method make_move that calls the current player's make_move method" do
 		target_player = players.all[players.current_player]
 		expect(target_player).to receive(:make_move)
-		players.make_move()
+		players.make_move
 	end
 end

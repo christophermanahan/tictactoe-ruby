@@ -30,11 +30,11 @@ describe "controller" do
 
 	it "Has a method retrieve_value that calls write with the write message" do
 		expect(controller.writer).to receive(:write).with(test_message)
-		controller.retrieve_value()
+		controller.retrieve_value
 	end
 
 	it "Has a method retrieve_value that calls read and returns the result" do
 		expect(controller.reader).to receive(:read).and_return(test_message)
-		controller.retrieve_value()
+		controller.retrieve_value
 	end
 end

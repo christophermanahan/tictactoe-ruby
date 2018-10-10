@@ -5,7 +5,7 @@ describe "reader" do
 		reader = Reader.new
 		test_message = "test"
 		allow($stdin).to receive(:gets).and_return(test_message)
-		input = reader.read()
+		input = reader.read
 		expect(input).to eq test_message
 	end
 end

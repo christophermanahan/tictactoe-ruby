@@ -5,14 +5,27 @@ describe "board" do
 	let (:board) { board = Board.new(3, Cell) }
 
 	it "Is initialized with cells set to a size*size length array" do
-		expect(board.cells.count).to eq 9
+		expect(board.cells.size).to eq 9
 	end
 
 	it "Is initialized with a model array containing instances of cell" do
 		expect(board.cells).to all(be_a(Cell))
 	end
 
-	it "Has a method set_player that invokes the setPlayer method on a cell at coordinate with provided number" do
+	it "Has a method full that returns false if set_player has not been called on all cells" do
+		board.set_player(0, 0)
+		board.set_player(0, 1)
+		expect(board.full?).to eq(false)
+	end
+
+	it "Has a method full that returns true if set_player has been called on all cells" do
+		for cell in 0..8 do
+			board.set_player(0, cell)
+		end
+		expect(board.full?).to eq(true)
+	end
+
+	it "Has a method set_player that invokes the set_player method on a cell at coordinate with provided number" do
 		target_cell = board.cells[0]
 		expect(target_cell).to receive(:set_player)
 		board.set_player(0, 0)

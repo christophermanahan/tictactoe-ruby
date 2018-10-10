@@ -29,11 +29,11 @@ describe "player" do
 
 	it "Has a method make_move that calls the move_maker's retrieve_value method" do
 		expect(player.move_maker).to receive(:retrieve_value)
-		player.make_move()
+		player.make_move
 	end
 
 	it "Has a method make_move that calls the board's set_player method with the player_number and the result of retrieve_value" do
 		expect(player.board).to receive(:set_player).with(0, 0)
-		player.make_move()
+		player.make_move
 	end
 end
