@@ -8,6 +8,7 @@ class Player
 	end
 
 	def make_move()
-		move_maker.get_move()
+		move = move_maker.retrieve_value()
+		board.set_player(number, move)
 	end
 end

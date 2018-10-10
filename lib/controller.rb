@@ -7,7 +7,7 @@ class Controller
 		@reader = reader
 	end
 
-	def get_move()
+	def retrieve_value()
 		writer.write(write_message)
 		reader.read()
 	end

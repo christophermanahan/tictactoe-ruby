@@ -28,13 +28,13 @@ describe "controller" do
 		expect(controller.reader).to be_a(MockReader)
 	end
 
-	it "Has a method get_move that calls write with the write message" do
+	it "Has a method retrieve_value that calls write with the write message" do
 		expect(controller.writer).to receive(:write).with(test_message)
-		controller.get_move()
+		controller.retrieve_value()
 	end
 
-	it "Has a method get_move that calls read and returns the result" do
+	it "Has a method retrieve_value that calls read and returns the result" do
 		expect(controller.reader).to receive(:read).and_return(test_message)
-		controller.get_move()
+		controller.retrieve_value()
 	end
 end

@@ -1,20 +1,22 @@
 require "./lib/player"
 
 class MockMoveMaker
-	def get_move()
+	def retrieve_value()
+		0
 	end
 end
 
-# Not sure I need this or not we shall see
 class MockBoard
+	def set_player(player_number, index)
+	end
 end
 
 describe "player" do
-	let (:test_number) { test_number = 0 }
-	let (:player) { player = Player.new(test_number, MockMoveMaker.new, MockBoard.new) }
+	let (:test_player_number) { test_player_number = 0 }
+	let (:player) { player = Player.new(test_player_number, MockMoveMaker.new, MockBoard.new) }
 
 	it "Is initialized with a number" do
-		expect(player.number).to eq test_number
+		expect(player.number).to eq test_player_number
 	end
 
 	it "Is initialized with a move_maker" do
@@ -25,11 +27,13 @@ describe "player" do
 		expect(player.board).to be_a(MockBoard)
 	end
 
-	it "Has a method make_move that calls the move_maker's get_move method" do
-		expect(player.move_maker).to receive(:get_move)
+	it "Has a method make_move that calls the move_maker's retrieve_value method" do
+		expect(player.move_maker).to receive(:retrieve_value)
 		player.make_move()
 	end
 
-	it "Has a method make_move that calls the board set_move method with the result of move_maker's get_move method" do
+	it "Has a method make_move that calls the board's set_player method with the player_number and the result of retrieve_value" do
+		expect(player.board).to receive(:set_player).with(0, 0)
+		player.make_move()
 	end
 end
