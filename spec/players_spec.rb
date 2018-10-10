@@ -7,7 +7,7 @@ end
 
 describe "players" do
 	let (:test_number) { test_number = 0 }
-	let (:mock_players) { mock_players = Array.new(2).fill(MockPlayer.new) }
+	let (:mock_players) { mock_players = Array.new(2) { MockPlayer.new } }
 	let (:players) { players = Players.new(mock_players, test_number) }
 
 	it "Is initialized with all set to an array of player instances" do
