@@ -5,8 +5,8 @@ class Board
 		@cells = Array.new(size*size).fill(cell.new)
 	end
 
-	def set_player(player_number, coordinate)
-		target_cell = @cells[coordinate.position]
+	def set_player(player_number, cell)
+		target_cell = @cells[cell]
 		target_cell.set_player(player_number)
 	end
 end

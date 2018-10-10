@@ -1,6 +1,5 @@
 require "./lib/board"
 require "./lib/cell"
-require "./lib/coordinate"
 
 describe "board" do
 	let (:board) { board = Board.new(3, Cell) }
@@ -14,9 +13,8 @@ describe "board" do
 	end
 
 	it "Has a method set_player that invokes the setPlayer method on a cell at coordinate with provided number" do
-		coordinate = Coordinate.new(0)
-		target_cell = board.cells[coordinate.position]
+		target_cell = board.cells[0]
 		expect(target_cell).to receive(:set_player)
-		board.set_player(0, coordinate)
+		board.set_player(0, 0)
 	end
 end
