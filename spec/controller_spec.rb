@@ -3,6 +3,7 @@ require "./lib/writer"
 
 class MockWriter
 	def write(write_message)
+		return 0
 	end
 end
 
