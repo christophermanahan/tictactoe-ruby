@@ -4,14 +4,6 @@ require "./lib/cell"
 describe "board" do
 	let (:board) { board = Board.new(3, Cell) }
 
-	it "Is initialized with cells set to a size*size length array" do
-		expect(board.cells.size).to eq 9
-	end
-
-	it "Is initialized with a model array containing instances of cell" do
-		expect(board.cells).to all(be_a(Cell))
-	end
-
 	it "Has a method number_array that returns a representation of the board with the player_number of each position if occupied" do
 		board.set_player(0, 0)
 		expect(board.number_array).to eq [0, nil, nil, nil, nil, nil, nil, nil, nil]

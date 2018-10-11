@@ -7,8 +7,9 @@ class MockIO
 end
 
 describe "writer" do
+	let (:writer) { writer = Writer.new(MockIO.new) }
+
 	it "Has a method write that calls puts with the provided write_message" do
-		writer = Writer.new(MockIO.new)
 		test_message = "test"
 		expect(writer.write(test_message)).to eq test_message
 	end
