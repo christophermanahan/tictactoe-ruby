@@ -2,12 +2,13 @@ require "./lib/player"
 
 class MockMoveMaker
 	def retrieve_value()
-		0
+		"1"
 	end
 end
 
 class MockBoard
-	def set_player(player_number, index)
+	def set_player(player_number, cell)
+		[player_number, cell]
 	end
 end
 
@@ -27,13 +28,7 @@ describe "player" do
 		expect(player.board).to be_a(MockBoard)
 	end
 
-	it "Has a method make_move that calls the move_maker's retrieve_value method" do
-		expect(player.move_maker).to receive(:retrieve_value)
-		player.make_move
-	end
-
-	it "Has a method make_move that calls the board's set_player method with the player_number and the result of retrieve_value" do
-		expect(player.board).to receive(:set_player).with(0, 0)
-		player.make_move
+	it "Has a method make_move that calls the board's set_player method with the player_number and the result of retrieve_value converted to int" do
+		expect(player.make_move).to eq [test_player_number, 1]
 	end
 end

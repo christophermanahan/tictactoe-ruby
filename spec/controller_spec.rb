@@ -3,7 +3,7 @@ require "./lib/writer"
 
 class MockWriter
 	def write(write_message)
-		return 0
+		write_message
 	end
 end
 
@@ -30,12 +30,10 @@ describe "controller" do
 	end
 
 	it "Has a method retrieve_value that calls write with the write message" do
-		expect(controller.writer).to receive(:write).with(test_message)
-		controller.retrieve_value
+		expect(controller.retrieve_value).to eq test_message
 	end
 
 	it "Has a method retrieve_value that calls read and returns the result" do
-		expect(controller.reader).to receive(:read).and_return(test_message)
-		controller.retrieve_value
+		expect(controller.retrieve_value).to eq test_message
 	end
 end

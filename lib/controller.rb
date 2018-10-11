@@ -9,6 +9,6 @@ class Controller
 
 	def retrieve_value()
 		writer.write(write_message)
-		reader.read()
+		reader.read
 	end
 end

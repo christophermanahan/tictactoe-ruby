@@ -1,10 +1,15 @@
 require "./lib/writer"
 
+class MockIO
+	def puts(write_message)
+		write_message
+	end
+end
+
 describe "writer" do
 	it "Has a method write that calls puts with the provided write_message" do
-		writer = Writer.new
+		writer = Writer.new(MockIO.new)
 		test_message = "test"
-		expect($stdin).to receive(:puts).with(test_message)
-		writer.write(test_message)
+		expect(writer.write(test_message)).to eq test_message
 	end
 end

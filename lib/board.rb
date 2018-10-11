@@ -5,6 +5,10 @@ class Board
 		@cells = Array.new(size*size) { cell.new }
 	end
 
+	def number_array()
+		cells.map { |cell| cell.player }
+	end
+
 	def full?()
 		cells.all? { |cell| not cell.empty? }
 	end
