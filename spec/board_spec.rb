@@ -21,10 +21,4 @@ describe "board" do
 		end
 		expect(board.full?).to eq(true)
 	end
-
-	it "Has a method set_player that invokes the set_player method on a cell at coordinate with provided number" do
-		target_cell = board.cells[0]
-		board.set_player(0, 0)
-		expect(target_cell.player).to eq 0
-	end
 end

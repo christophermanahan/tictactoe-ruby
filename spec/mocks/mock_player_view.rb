@@ -1,4 +1,4 @@
-class PlayerView
+class MockPlayerView
 	attr_reader :symbol
 
 	def initialize(symbol)

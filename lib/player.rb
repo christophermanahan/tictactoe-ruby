@@ -1,6 +1,4 @@
 class Player
-	attr_reader :number, :move_maker, :board
-
 	def initialize(number, move_maker, board)
 		@number = number
 		@move_maker = move_maker
@@ -11,4 +9,7 @@ class Player
 		move = move_maker.retrieve_value.to_i
 		board.set_player(number, move)
 	end
+
+	private
+	attr_reader :number, :move_maker, :board
 end

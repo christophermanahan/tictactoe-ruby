@@ -1,17 +1,6 @@
 require "./lib/controller"
-require "./lib/writer"
-
-class MockWriter
-	def write(write_message)
-		write_message
-	end
-end
-
-class MockReader
-	def read()
-		"test"
-	end
-end
+require "mocks/mock_writer"
+require "mocks/mock_reader"
 
 describe "controller" do
 	let (:test_message) { test_message = "test" }

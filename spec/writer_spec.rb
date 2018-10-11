@@ -1,10 +1,5 @@
 require "./lib/writer"
-
-class MockIO
-	def puts(write_message)
-		write_message
-	end
-end
+require "mocks/mock_io"
 
 describe "writer" do
 	let (:writer) { writer = Writer.new(MockIO.new) }

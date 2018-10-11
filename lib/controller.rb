@@ -1,6 +1,4 @@
 class Controller
-	attr_reader :write_message, :writer, :reader
-
 	def initialize(write_message, writer, reader)
 		@write_message = write_message
 		@writer = writer
@@ -11,4 +9,7 @@ class Controller
 		writer.write(write_message)
 		reader.read
 	end
+
+	private
+	attr_reader :write_message, :writer, :reader
 end

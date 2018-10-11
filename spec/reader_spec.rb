@@ -1,10 +1,5 @@
 require "./lib/reader"
-
-class MockIO
-	def gets()
-		"test"
-	end
-end
+require "mocks/mock_io"
 
 describe "reader" do
 	let (:reader) { reader = Reader.new(MockIO.new) } 
