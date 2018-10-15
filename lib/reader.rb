@@ -3,7 +3,7 @@ class Reader
 		@io = io
 	end
 
-	def read()
+	def retrieve_value()
 		io.gets
 	end
 
