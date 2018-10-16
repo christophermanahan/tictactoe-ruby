@@ -7,7 +7,9 @@ class MockIO
 end
 
 describe "display" do
-	let (:display) { Display.new(MockIO.new) }
+	let (:display) do
+		Display.new(MockIO.new)
+	end
 
 	it "Has a method display that calls puts with the provided formatted_string" do
 		formatted_string = "test"

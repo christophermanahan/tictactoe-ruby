@@ -7,7 +7,9 @@ class MockIO
 end
 
 describe "input" do
-	let (:input) { Input.new(MockIO.new) } 
+	let (:input) do
+		Input.new(MockIO.new)
+	end
 
 	it "Has a method retrieve_value that calls gets and returns the input" do
 		expect(input.get).to eq "test"

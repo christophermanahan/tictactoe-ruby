@@ -2,8 +2,15 @@ require "./lib/board"
 require "./lib/cell"
 
 describe "board" do
-	let (:cells) { Array.new(9) { Cell.new } }
-	let (:board) { Board.new(cells) }
+	let (:cells) do 
+		Array.new(9) do
+			Cell.new
+		end
+	end
+
+	let (:board) do
+		Board.new(cells)
+	end
 
 	it "Has a method get_board that returns a representation of the board with the player_number of each position if occupied" do
 		board.set_symbol("X", 0)
