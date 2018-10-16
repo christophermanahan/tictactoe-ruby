@@ -1,4 +1,4 @@
-class Display
+class Displayer
 	def initialize(io)
 		@io = io
 	end
