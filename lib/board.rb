@@ -3,17 +3,17 @@ class Board
 		@cells = Array.new(size*size) { cell.new }
 	end
 
-	def number_array()
-		cells.map { |cell| cell.player }
+	def get_board()
+		cells.map { |cell| cell.move }
 	end
 
 	def full?()
 		cells.all? { |cell| not cell.empty? }
 	end
 
-	def set_player(player_number, idx)
-		target_cell = cells[idx]
-		target_cell.set_player(player_number)
+	def set_move(move, position)
+		target_cell = cells[position]
+		target_cell.set_move(move)
 	end
 
 	private

@@ -1,11 +1,11 @@
 class Cell
-	attr_reader :player
+	attr_reader :move
 
-	def set_player(player_number)
-		@player = player_number
+	def set_move(move)
+		@move = move
 	end
 
 	def empty?()
-		player == nil
+		move == nil
 	end
 end
