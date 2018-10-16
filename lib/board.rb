@@ -1,0 +1,21 @@
+class Board
+	def initialize(cells)
+		@cells = cells
+	end
+
+	def get_board()
+		cells.map { |cell| cell.symbol }
+	end
+
+	def full?()
+		cells.all? { |cell| not cell.empty? }
+	end
+
+	def set_symbol(symbol, position)
+		target_cell = cells[position]
+		target_cell.set_symbol(symbol)
+	end
+
+	private
+	attr_reader :cells
+end

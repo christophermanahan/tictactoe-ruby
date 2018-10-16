@@ -1,7 +1,7 @@
 require "./lib/cell.rb"
 
 describe "cell" do
-	let (:cell) { cell = Cell.new }
+	let (:cell) { Cell.new }
 
 	it "Has a method set_symbol that sets the symbol to the provided player symbol" do
 		cell.set_symbol("X")
