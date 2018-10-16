@@ -1,11 +1,11 @@
 class Cell
-	attr_reader :move
+	attr_reader :symbol
 
-	def set_move(move)
-		@move = move
+	def set_symbol(symbol)
+		@symbol = symbol
 	end
 
 	def empty?()
-		move == nil
+		symbol == nil
 	end
 end
