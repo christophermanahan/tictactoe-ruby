@@ -6,6 +6,6 @@ class Cell
   end
 
   def empty?()
-    symbol == nil
+    symbol.nil?
   end
 end
