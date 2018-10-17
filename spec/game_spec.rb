@@ -1,100 +1,71 @@
-# require "./lib/game"
+require "./lib/game"
 
-# class MockBoard
-#   attr_accessor :full, :count
-#   attr_reader :times, :moves
+class MockBoard
+  attr_accessor :moves_until_full, :latest_move
 
-#   def initialize(full, times)
-#     @full = full
-#     @times = times
-#     @moves = []
-#     @count = 0
-#   end
+  def initialize(moves_until_full)
+    @moves_until_full = moves_until_full
+    @latest_move = []
+  end
 
-#   def get_board
-#     "board"
-#   end
+  def rows()
+    "[#{latest_move.join(" ")}]"
+  end
 
-#   def full?
-#     full
-#   end
+  def full?()
+    moves_until_full == 0
+  end
 
-#   def set_symbol(symbol, position)
-#     if count == times
-#       @full = true
-#       moves
-#     else
-#       @count += 1
-#       moves << [symbol, position]
-#     end
-#   end
+  def put(symbol, position)
+    self.moves_until_full -= 1
+    self.latest_move = [symbol, position]
+  end
+end
 
-#   private
-#   attr_accessor :full, :count
-# end
+class MockBoardFormatter
+  def format_board(board)
+    "|#{board}|"
+  end
+end
 
-# class MockBoardFormatter
-#   def format_board(board_array)
-#     board_array
-#   end
-# end
+class MockDisplayer
+  attr_accessor :log
 
-# class MockDisplayer
-#   attr_accessor :display_calls
+  def display(formatted_string)
+    self.log = formatted_string
+  end
+end
 
-#   def initialize()
-#     @display_calls = []
-#   end
+class MockInput
+  def get()
+    "1"
+  end
+end
 
-#   def display(string)
-#     @display_calls << string
-#   end
-# end
+describe "game" do
+  let (:displayer) do
+    MockDisplayer.new
+  end
 
-# class MockInput
-#   def get
-#     1
-#   end
-# end
+  let (:symbols) do
+    symbols = ["X", "O"].cycle
+  end
 
-# describe "game" do
-#   let (:board) do
-#     MockBoard.new(false, 2)
-#   end
+  it "Displays the formatted board" do
+    game = Game.new(MockBoard.new(0), MockBoardFormatter.new, displayer, MockInput.new, symbols)
+    game.run
+    expect(displayer.log).to eq "|[]|"
+  end
 
-#   let (:board_formatter) do
-#     MockBoardFormatter.new
-#   end
+  it "Puts the current player's move on the board if it is not full" do
+    game = Game.new(MockBoard.new(1), MockBoardFormatter.new, displayer, MockInput.new, symbols)
+    game.run
+    expect(displayer.log).to eq "|[X 1]|"
+  end
 
-#   let (:displayer) do
-#     MockDisplayer.new
-#   end
-
-#   let (:input) do
-#     MockInput.new
-#   end
-
-#   let (:game) do
-#     Game.new(board, board_formatter, ["X", "O"], displayer, input)
-#   end
-
-#   it "Has a method run that displays the board and displays the move prompt" do
-#     game.run
-#     move_prompt = "Choose a Move! (1-9)"
-#     display_board = "board"
-#     expect(displayer.display_calls).to eq [
-#       display_board,
-#       move_prompt,
-#       display_board,
-#       move_prompt,
-#       display_board,
-#       move_prompt,
-#       display_board
-#     ]
-#   end
-
-#   it "Has a method run that calls boards set symbol method with the current symbol and result of input when board is not full" do
-#     game.run
-#     expect(board.moves).to eq [["X", 1], ["O", 1]]
-#   end
-# end
+  it "Puts the next player's move on the board if it is still not full" do
+    game = Game.new(MockBoard.new(2), MockBoardFormatter.new, displayer, MockInput.new, symbols)
+    game.run
+    expect(displayer.log).to eq "|[O 1]|"
+  end
+end

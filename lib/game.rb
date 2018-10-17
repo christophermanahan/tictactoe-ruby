@@ -1,32 +1,22 @@
 class Game
-  def initialize(board, board_formatter, symbols, displayer, input)
+  def initialize(board, board_formatter, displayer, input, symbols)
     @board = board
     @board_formatter = board_formatter
-    @symbols = symbols
     @displayer = displayer
     @input = input
+    @symbols = symbols
   end
 
   def run()
-    display_board
+    rows = board.rows
+    formatted_board = board_formatter.format_board(rows)
+    displayer.display(formatted_board)
     if !board.full?
-      move(symbols.first)
-      @symbols = symbols.reverse
+      board.put(symbols.next, input.get)
       run
     end
   end
 
   private
-  attr_reader :board, :board_formatter, :symbols, :displayer, :input
-  def display_board()
-    rows = board.rows
-    formatted_board = board_formatter.format_board(rows)
-    displayer.display(formatted_board)
-  end
-
-  def move(symbol)
-    displayer.display("Choose a Move! (1-9)")
-    position = input.get
-    board.place_move_on_board(symbol, position)
-  end
+  attr_reader :board, :board_formatter, :displayer, :input, :symbols
 end

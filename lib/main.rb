@@ -12,10 +12,10 @@ class Main
     end
     board = Board.new(cells)
     board_formatter = BoardFormatter.new
-    symbols = ["X", "O"]
+    symbols = ["X", "O"].cycle
     displayer = Displayer.new(io)
     input = Input.new(io)
-    game = Game.new(board, board_formatter, symbols, displayer, input)
+    game = Game.new(board, board_formatter, displayer, input, symbols)
     game.run
   end
 end
