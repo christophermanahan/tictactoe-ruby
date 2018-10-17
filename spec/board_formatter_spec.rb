@@ -6,7 +6,7 @@ describe "board_formatter" do
   end
 
   let (:board_array) do
-    ["X", nil, nil, nil, nil, nil, nil, nil, nil]
+    [["X", nil, nil], [nil, nil, nil], [nil, nil, nil]]
   end
 
   let (:formatted_board_string) do

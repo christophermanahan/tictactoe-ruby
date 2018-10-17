@@ -1,32 +1,29 @@
 class BoardFormatter
-  def format_board(board_array)
-    board_strings = board_with_moves(board_array)
-    length = board_strings.count
-    board_builder(board_strings, length, size(length), []).join("\n")
+  def format_board(rows)
+    filled_rows = fill_empty_positions(rows)
+    board_builder(filled_rows, rows.size, formatted_board = [])
+    formatted_board.join("\n")
   end
 
   private
-  def board_with_moves(board_array)
-    board_array.each_with_index.map do |board_string, i| 
-      board_string ? board_string : (i+1).to_s
+  def fill_empty_positions(rows)
+    flat = rows.flatten
+    flat.map!.with_index do |symbol, position| 
+      symbol || convert_position(position)
     end
+    flat.each_slice(rows.size).to_a
   end
 
-  def size(length)
-    Math.sqrt(length)
+  def convert_position(position)
+    (position+1).to_s
   end
 
-  def board_builder(board_strings, length, size, formatted_board)
+  def board_builder(rows, size, formatted_board)
     formatted_board << divider(size)
-    (0..length-1).step(size) do |row_start|
-      add_row_and_divider(board_strings, row_start, size, formatted_board)
+    rows.each do |row|
+      formatted_board << row_string(row)
+      formatted_board << divider(size)
     end
-    formatted_board
-  end
-
-  def add_row_and_divider(board_strings, row_start, size, formatted_board)
-    formatted_board << row_string(board_strings[row_start..row_start+size-1])
-    formatted_board << divider(size)
   end
 
   def divider(size)

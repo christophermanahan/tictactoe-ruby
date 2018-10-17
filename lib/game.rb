@@ -19,14 +19,14 @@ class Game
   private
   attr_reader :board, :board_formatter, :symbols, :displayer, :input
   def display_board()
-    board_array = board.get_board
-    formatted_board = board_formatter.format_board(board_array)
+    rows = board.rows
+    formatted_board = board_formatter.format_board(rows)
     displayer.display(formatted_board)
   end
 
   def move(symbol)
     displayer.display("Choose a Move! (1-9)")
     position = input.get
-    board.set_symbol(symbol, position)
+    board.place_move_on_board(symbol, position)
   end
 end
