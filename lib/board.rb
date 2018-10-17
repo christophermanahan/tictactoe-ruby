@@ -4,7 +4,7 @@ class Board
   end
 
   def get_board()
-    cells.map { |cell| cell.symbol }
+    cells.map(&:symbol)
   end
 
   def full?()
