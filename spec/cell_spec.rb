@@ -5,12 +5,16 @@ describe "cell" do
     Cell.new
   end
 
-  it "Has a method fill that sets the symbol to the provided player symbol" do
+  it "Sets the symbol" do
     cell.fill("X")
     expect(cell.symbol).to eq "X"
   end
 
-  it "Returns false from empty? after a player is set" do
+  it "Is true if a symbol has not been set" do
+    expect(cell.empty?).to eq true
+  end
+
+  it "Is false if a symbol has been set" do
     cell.fill("X")
     expect(cell.empty?).to eq false
   end
