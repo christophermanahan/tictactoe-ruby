@@ -11,11 +11,6 @@ describe "board" do
     expect(board.rows).to eq [["X", nil, nil], [nil, nil, nil], [nil, nil, nil]]
   end
 
-  it "Has a method get_board that returns a representation of the board with the player_number of each position if occupied" do
-    board.place_move_on_board("X", 1)
-    expect(board.get_board).to eq ["X", nil, nil, nil, nil, nil, nil, nil, nil]
-  end
-
   it "Has a method full that returns false if place_move_on_board has not been called on all cells" do
     board.place_move_on_board("X", 1)
     board.place_move_on_board("O", 2)

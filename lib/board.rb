@@ -3,10 +3,6 @@ class Board
     @cells = cells
   end
 
-  def get_board()
-    cells.map(&:symbol)
-  end
-
   def rows()
     symbols = cells.map(&:symbol)
     row_length = Math.sqrt(cells.size)
