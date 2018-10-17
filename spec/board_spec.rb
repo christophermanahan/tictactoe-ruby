@@ -13,18 +13,18 @@ describe "board" do
   end
 
   it "Has a method get_board that returns a representation of the board with the player_number of each position if occupied" do
-    board.set_symbol("X", 0)
+    board.set_symbol("X", 1)
     expect(board.get_board).to eq ["X", nil, nil, nil, nil, nil, nil, nil, nil]
   end
 
   it "Has a method full that returns false if set_symbol has not been called on all cells" do
-    board.set_symbol("X", 0)
-    board.set_symbol("O", 1)
+    board.set_symbol("X", 1)
+    board.set_symbol("O", 2)
     expect(board.full?).to eq(false)
   end
 
   it "Has a method full that returns true if set_symbol has been called on all cells" do
-    for position in 0..8 do
+    for position in 1..9 do
       board.set_symbol("X", position)
     end
     expect(board.full?).to eq(true)

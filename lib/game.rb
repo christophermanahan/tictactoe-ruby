@@ -26,11 +26,7 @@ class Game
 
   def move(symbol)
     displayer.display("Choose a Move! (1-9)")
-    position = convert_input(input.get)
+    position = input.get
     board.set_symbol(symbol, position)
-  end
-
-  def convert_input(string)
-    string.to_i - 1
   end
 end
