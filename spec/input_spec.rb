@@ -11,7 +11,7 @@ describe "input" do
     Input.new(MockIO.new)
   end
 
-  it "Has a method get that calls gets and returns the input" do
+  it "Receives input from the console" do
     expect(input.get).to eq 1
   end
 end
