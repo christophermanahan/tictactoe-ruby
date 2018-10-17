@@ -5,7 +5,7 @@ describe "board_formatter" do
     BoardFormatter.new
   end
 
-  let (:board_array) do
+  let (:rows) do
     [["X", nil, nil], [nil, nil, nil], [nil, nil, nil]]
   end
 
@@ -19,7 +19,7 @@ describe "board_formatter" do
       "+-----+-----+-----+"
   end
 
-  it "Has a method format_board that takes a board_array and returns a formatted board string" do
-    expect(board_formatter.format_board(board_array)).to eq formatted_board_string
+  it "Formats the rows into a printable board string" do
+    expect(board_formatter.format_board(rows)).to eq formatted_board_string
   end
 end
