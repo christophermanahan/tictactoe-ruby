@@ -11,13 +11,13 @@ describe "board" do
     expect(board.rows).to eq [["X", nil, nil], [nil, nil, nil], [nil, nil, nil]]
   end
 
-  it "Has a method full that returns false if place_move_on_board has not been called on all cells" do
+  it "Is false when the board is not full" do
     board.place_move_on_board("X", 1)
     board.place_move_on_board("O", 2)
     expect(board.full?).to eq(false)
   end
 
-  it "Has a method full that returns true if place_move_on_board has been called on all cells" do
+  it "Is true when the board is full" do
     for position in 1..9 do
       board.place_move_on_board("X", position)
     end
