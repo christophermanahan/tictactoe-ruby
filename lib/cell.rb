@@ -1,11 +1,11 @@
 class Cell
-	attr_reader :symbol
+  attr_reader :symbol
 
-	def set_symbol(symbol)
-		@symbol = symbol
-	end
+  def set_symbol(symbol)
+    @symbol = symbol
+  end
 
-	def empty?()
-		symbol == nil
-	end
+  def empty?()
+    symbol == nil
+  end
 end
