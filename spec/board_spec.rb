@@ -7,19 +7,19 @@ describe "board" do
   end
 
   it "Retrieves the rows of the board" do
-    board.place_move_on_board("X", 1)
+    board.put("X", 1)
     expect(board.rows).to eq [["X", nil, nil], [nil, nil, nil], [nil, nil, nil]]
   end
 
   it "Is false when the board is not full" do
-    board.place_move_on_board("X", 1)
-    board.place_move_on_board("O", 2)
+    board.put("X", 1)
+    board.put("O", 2)
     expect(board.full?).to eq(false)
   end
 
   it "Is true when the board is full" do
     for position in 1..9 do
-      board.place_move_on_board("X", position)
+      board.put("X", position)
     end
     expect(board.full?).to eq(true)
   end
