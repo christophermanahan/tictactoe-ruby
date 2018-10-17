@@ -15,7 +15,7 @@ class Board
     position.to_i - 1
   end
 
-  def set_symbol(symbol, position)
+  def place_move_on_board(symbol, position)
     converted_position = convert_position(position)
     target_cell = cells[converted_position]
     target_cell.fill(symbol)
