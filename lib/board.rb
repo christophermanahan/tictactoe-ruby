@@ -7,6 +7,12 @@ class Board
     cells.map(&:symbol)
   end
 
+  def rows()
+    symbols = cells.map(&:symbol)
+    row_length = Math.sqrt(cells.size)
+    symbols.each_slice(row_length).to_a
+  end
+
   def full?()
     cells.all? { |cell| !cell.empty? }
   end
