@@ -13,7 +13,7 @@ class Board
 
   def set_symbol(symbol, position)
     target_cell = cells[position]
-    target_cell.set_symbol(symbol)
+    target_cell.fill(symbol)
   end
 
   private

@@ -1,7 +1,7 @@
 class Cell
   attr_reader :symbol
 
-  def set_symbol(symbol)
+  def fill(symbol)
     @symbol = symbol
   end
 
