@@ -1,6 +1,8 @@
 AllCops:
+  TargetRubyVersion: 2.3
   Exclude:
     - 'spec/spec_helper.rb'
+    - 'vendor/**/*'
 
 Metrics/MethodLength:
   Exclude:
@@ -11,4 +13,7 @@ Metrics/BlockLength:
     - 'spec/**/*'
 
 Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
   Enabled: false
