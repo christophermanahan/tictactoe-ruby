@@ -52,19 +52,37 @@ describe "game" do
   end
 
   it "Displays the formatted board" do
-    game = Game.new(board: MockBoard.new(0), board_formatter: MockBoardFormatter.new, displayer: displayer, input: MockInput.new, symbols: symbols)
+    game = Game.new(
+      board: MockBoard.new(0),
+      board_formatter: MockBoardFormatter.new,
+      displayer: displayer,
+      input: MockInput.new,
+      symbols: symbols
+    )
     game.run
     expect(displayer.log).to eq "|[]|"
   end
 
   it "Puts the current player's move on the board if it is not full" do
-    game = Game.new(board: MockBoard.new(1), board_formatter: MockBoardFormatter.new, displayer: displayer, input: MockInput.new, symbols: symbols)
+    game = Game.new(
+      board: MockBoard.new(0),
+      board_formatter: MockBoardFormatter.new,
+      displayer: displayer,
+      input: MockInput.new,
+      symbols: symbols
+    )
     game.run
     expect(displayer.log).to eq "|[X 1]|"
   end
 
   it "Puts the next player's move on the board if it is still not full" do
-    game = Game.new(board: MockBoard.new(2), board_formatter: MockBoardFormatter.new, displayer: displayer, input: MockInput.new, symbols: symbols)
+    game = Game.new(
+      board: MockBoard.new(0),
+      board_formatter: MockBoardFormatter.new,
+      displayer: displayer,
+      input: MockInput.new,
+      symbols: symbols
+    )
     game.run
     expect(displayer.log).to eq "|[O 1]|"
   end
