@@ -22,10 +22,10 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
-    rubocop (0.59.2)
+    rubocop (0.57.2)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
-      parser (>= 2.5, != 2.5.1.1)
+      parser (>= 2.5)
       powerpack (~> 0.1)
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
@@ -38,7 +38,7 @@ PLATFORMS
 
 DEPENDENCIES
   rspec
-  rubocop
+  rubocop (~> 0.57.2)
 
 BUNDLED WITH
    1.16.5
