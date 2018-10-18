@@ -15,7 +15,13 @@ class Main
     symbols = ["X", "O"].cycle
     displayer = Displayer.new(io)
     input = Input.new(io)
-    game = Game.new(board, board_formatter, displayer, input, symbols)
+    game = Game.new(
+      board: board,
+      board_formatter: board_formatter,
+      displayer: displayer,
+      input: input,
+      symbols: symbols
+    )
     game.run
   end
 end

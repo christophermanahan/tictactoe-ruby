@@ -1,5 +1,5 @@
 class Game
-  def initialize(board, board_formatter, displayer, input, symbols)
+  def initialize(board:, board_formatter:, displayer:, input:, symbols:)
     @board = board
     @board_formatter = board_formatter
     @displayer = displayer
