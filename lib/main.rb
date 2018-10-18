@@ -1,9 +1,9 @@
-require "./lib/cell"
-require "./lib/board"
-require "./lib/board_formatter"
-require "./lib/displayer"
-require "./lib/input"
-require "./lib/game"
+require './lib/cell'
+require './lib/board'
+require './lib/board_formatter'
+require './lib/displayer'
+require './lib/input'
+require './lib/game'
 
 class Main
   def start(io)
@@ -12,7 +12,7 @@ class Main
     end
     board = Board.new(cells)
     board_formatter = BoardFormatter.new
-    symbols = ["X", "O"].cycle
+    symbols = %w[X O].cycle
     displayer = Displayer.new(io)
     input = Input.new(io)
     game = Game.new(

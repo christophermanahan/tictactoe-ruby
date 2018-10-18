@@ -1,0 +1,14 @@
+AllCops:
+  Exclude:
+    - 'spec/spec_helper.rb'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'lib/main.rb' 
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+Style/Documentation:
+  Enabled: false
