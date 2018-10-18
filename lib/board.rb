@@ -3,13 +3,13 @@ class Board
     @cells = cells
   end
 
-  def rows()
+  def rows
     symbols = cells.map(&:symbol)
     row_length = Math.sqrt(cells.size)
     symbols.each_slice(row_length).to_a
   end
 
-  def full?()
+  def full?
     cells.all? { |cell| !cell.empty? }
   end
 
@@ -24,5 +24,6 @@ class Board
   end
 
   private
+
   attr_reader :cells
 end

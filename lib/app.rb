@@ -1,4 +1,4 @@
-require "./lib/main"
+require './lib/main'
 
 open_read_write = 1
 

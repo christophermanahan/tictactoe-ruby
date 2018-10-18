@@ -1,4 +1,5 @@
 # Gemfile
 
 source 'https://rubygems.org'
-gem 'rspec'
+gem 'rspec', require: false
+gem 'rubocop', require: false

@@ -2,20 +2,21 @@ class BoardFormatter
   def format_board(rows)
     filled_rows = fill_empty_positions(rows)
     board_builder(filled_rows, rows.size, formatted_board = [])
-    formatted_board.join("\n")
+    formatted_board.join('\n')
   end
 
   private
+
   def fill_empty_positions(rows)
     flat = rows.flatten
-    flat.map!.with_index do |symbol, position| 
+    flat.map!.with_index do |symbol, position|
       symbol || convert_position(position)
     end
     flat.each_slice(rows.size).to_a
   end
 
   def convert_position(position)
-    (position+1).to_s
+    (position + 1).to_s
   end
 
   def board_builder(rows, size, formatted_board)
@@ -27,10 +28,10 @@ class BoardFormatter
   end
 
   def divider(size)
-    "+#{Array.new(size).fill("-----").join("+")}+"
+    "+#{Array.new(size).fill('-----').join('+')}+"
   end
 
   def row_string(row)
-    "|  #{row.join("  |  ")}  |"
+    "|  #{row.join('  |  ')}  |"
   end
 end

@@ -3,10 +3,11 @@ class Input
     @io = io
   end
 
-  def get()
+  def get
     io.gets
   end
 
   private
+
   attr_reader :io
 end

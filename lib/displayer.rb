@@ -8,5 +8,6 @@ class Displayer
   end
 
   private
+
   attr_reader :io
 end

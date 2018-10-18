@@ -5,7 +5,7 @@ class Cell
     self.symbol = symbol
   end
 
-  def empty?()
+  def empty?
     symbol.nil?
   end
 end

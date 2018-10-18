@@ -1,4 +1,4 @@
-require "./lib/game"
+require './lib/game'
 
 class MockBoard
   attr_accessor :moves_until_full, :latest_move
@@ -8,11 +8,11 @@ class MockBoard
     @latest_move = []
   end
 
-  def rows()
-    "[#{latest_move.join(" ")}]"
+  def rows
+    "[#{latest_move.join(' ')}]"
   end
 
-  def full?()
+  def full?
     moves_until_full == 0
   end
 
@@ -37,53 +37,49 @@ class MockDisplayer
 end
 
 class MockInput
-  def get()
-    "1"
+  def get
+    '1'
   end
 end
 
-describe "game" do
-  let (:displayer) do
+describe 'game' do
+  let(:displayer) do
     MockDisplayer.new
   end
 
-  let (:symbols) do
-    symbols = ["X", "O"].cycle
-  end
-
-  it "Displays the formatted board" do
+  it 'Displays the formatted board' do
     game = Game.new(
       board: MockBoard.new(0),
       board_formatter: MockBoardFormatter.new,
       displayer: displayer,
       input: MockInput.new,
-      symbols: symbols
+      symbols: %w[X O].cycle
     )
     game.run
-    expect(displayer.log).to eq "|[]|"
+    expect(displayer.log).to eq '|[]|'
   end
 
-  it "Puts the current player's move on the board if it is not full" do
+  it 'Puts the current players move on the board if it is not full' do
     game = Game.new(
       board: MockBoard.new(1),
       board_formatter: MockBoardFormatter.new,
       displayer: displayer,
       input: MockInput.new,
-      symbols: symbols
+      symbols: %w[X O].cycle
     )
     game.run
-    expect(displayer.log).to eq "|[X 1]|"
+    expect(displayer.log).to eq '|[X 1]|'
   end
 
-  it "Puts the next player's move on the board if it is still not full" do
+  it 'Puts the next players move on the board if it is still not full' do
     game = Game.new(
       board: MockBoard.new(2),
       board_formatter: MockBoardFormatter.new,
       displayer: displayer,
       input: MockInput.new,
-      symbols: symbols
+      symbols: %w[X O].cycle
     )
     game.run
-    expect(displayer.log).to eq "|[O 1]|"
+    expect(displayer.log).to eq '|[O 1]|'
   end
 end
