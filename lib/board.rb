@@ -13,10 +13,6 @@ class Board
     cells.all? { |cell| !cell.empty? }
   end
 
-  def convert_position(position)
-    position.to_i - 1
-  end
-
   def put(symbol, position)
     converted_position = convert_position(position)
     target_cell = cells[converted_position]
@@ -26,4 +22,8 @@ class Board
   private
 
   attr_reader :cells
+
+  def convert_position(position)
+    position.to_i - 1
+  end
 end
