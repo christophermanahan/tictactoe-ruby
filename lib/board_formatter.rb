@@ -2,7 +2,7 @@ class BoardFormatter
   def format_board(rows)
     filled_rows = fill_empty_positions(rows)
     board_builder(filled_rows, rows.size, formatted_board = [])
-    formatted_board.join('\n')
+    formatted_board.join("\n")
   end
 
   private
