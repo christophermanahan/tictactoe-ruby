@@ -7,10 +7,8 @@ class MockBoardFormatter
 end
 
 class MockDisplayer
-  attr_accessor :log
-
   def display(formatted_string)
-    self.log = formatted_string
+    formatted_string
   end
 end
 
@@ -21,26 +19,19 @@ class MockInput
 end
 
 describe 'user_interface' do
-  let(:displayer) do
-    MockDisplayer.new
+  let(:user_interface) do
+    UserInterface.new(
+      board_formatter: MockBoardFormatter.new,
+      displayer: MockDisplayer.new,
+      input: MockInput.new
+    )
   end
 
   it 'Displays the formatted board' do
-    user_interface = UserInterface.new(
-      board_formatter: MockBoardFormatter.new,
-      displayer: displayer,
-      input: MockInput.new
-    )
-    user_interface.display_board('[]')
-    expect(displayer.log).to eq '|[]|'
+    expect(user_interface.display_board('[]')).to eq '|[]|'
   end
 
   it 'Gets user input' do
-    user_interface = UserInterface.new(
-      board_formatter: MockBoardFormatter.new,
-      displayer: displayer,
-      input: MockInput.new
-    )
     expect(user_interface.get).to eq '1'
   end
 end

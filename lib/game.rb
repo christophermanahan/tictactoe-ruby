@@ -1,27 +1,19 @@
 class Game
-  def initialize(board:, board_formatter:, displayer:, input:, symbols:)
+  def initialize(board:, user_interface:, symbols:)
     @board = board
-    @board_formatter = board_formatter
-    @displayer = displayer
-    @input = input
+    @user_interface = user_interface
     @symbols = symbols
   end
 
   def run
-    display_board
+    user_interface.display_board(board.rows)
     return if board.full?
 
-    board.put(symbols.next, input.get)
+    board.put(symbols.next, user_interface.get)
     run
   end
 
   private
 
-  attr_reader :board, :board_formatter, :displayer, :input, :symbols
-
-  def display_board
-    rows = board.rows
-    formatted_board = board_formatter.format_board(rows)
-    displayer.display(formatted_board)
-  end
+  attr_reader :board, :user_interface, :symbols
 end
