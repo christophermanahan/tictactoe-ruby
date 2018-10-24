@@ -3,25 +3,25 @@ require './lib/board'
 require './lib/board_formatter'
 require './lib/displayer'
 require './lib/input'
-require './lib/user_interface'
 require './lib/game'
 
 class Main
   def start(io)
-    cells = Array.new(9) { Cell.new }
+    cells = Array.new(9) do
+      Cell.new
+    end
+    board = Board.new(cells)
+    board_formatter = BoardFormatter.new
     symbols = %w[X O].cycle
-    user_interface = UserInterface.new(
-      board_formatter: BoardFormatter.new,
-      displayer: Displayer.new(io),
-      input: Input.new(io)
-    )
-
+    displayer = Displayer.new(io)
+    input = Input.new(io)
     game = Game.new(
-      board: Board.new(cells),
-      symbols: symbols,
-      user_interface: user_interface
+      board: board,
+      board_formatter: board_formatter,
+      displayer: displayer,
+      input: input,
+      symbols: symbols
     )
-
     game.run
   end
 end
