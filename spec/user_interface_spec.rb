@@ -1,7 +1,7 @@
 require './lib/user_interface'
 
-class MockBoardFormatter
-  def format_board(board)
+class MockFormatter
+  def format(board)
     "|#{board}|"
   end
 end
@@ -21,17 +21,17 @@ end
 describe 'user_interface' do
   let(:user_interface) do
     UserInterface.new(
-      board_formatter: MockBoardFormatter.new,
+      formatter: MockFormatter.new,
       displayer: MockDisplayer.new,
       input: MockInput.new
     )
   end
 
   it 'Displays the formatted board' do
-    expect(user_interface.display_board('[]')).to eq '|[]|'
+    expect(user_interface.display('[]')).to eq '|[]|'
   end
 
-  it 'Gets user input' do
-    expect(user_interface.get).to eq '1'
+  it 'Receives user input' do
+    expect(user_interface.get_input).to eq '1'
   end
 end

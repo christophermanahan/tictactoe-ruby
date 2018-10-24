@@ -1,20 +1,20 @@
 class UserInterface
-  def initialize(board_formatter:, displayer:, input:)
-    @board_formatter = board_formatter
+  def initialize(formatter:, displayer:, input:)
+    @formatter = formatter
     @displayer = displayer
     @input = input
   end
 
-  def display_board(rows)
-    formatted_board = board_formatter.format_board(rows)
-    displayer.display(formatted_board)
+  def display(unformatted)
+    formatted = formatter.format(unformatted)
+    displayer.display(formatted)
   end
 
-  def get
+  def get_input
     input.get
   end
 
   private
 
-  attr_reader :board_formatter, :displayer, :input
+  attr_reader :formatter, :displayer, :input
 end

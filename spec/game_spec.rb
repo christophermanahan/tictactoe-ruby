@@ -29,7 +29,7 @@ class MockUserInterface
     self.log = formatted_string
   end
 
-  def get
+  def get_input
     '1'
   end
 end

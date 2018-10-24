@@ -1,5 +1,5 @@
 require './lib/cell'
-require './lib/board_formatter'
+require './lib/formatter'
 require './lib/displayer'
 require './lib/input'
 require './lib/user_interface'
@@ -11,7 +11,7 @@ class Main
     cells = Array.new(9) { Cell.new }
     symbols = %w[X O].cycle
     user_interface = UserInterface.new(
-      board_formatter: BoardFormatter.new,
+      formatter: Formatter.new,
       displayer: Displayer.new(io),
       input: Input.new(io)
     )

@@ -9,7 +9,7 @@ class Game
     user_interface.display_board(board.rows)
     return if board.full?
 
-    board.put(symbols.next, user_interface.get)
+    board.put(symbols.next, user_interface.get_input)
     run
   end
 
