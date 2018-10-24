@@ -1,8 +1,8 @@
 class Game
-  def initialize(board:, user_interface:, symbols:)
+  def initialize(board:, symbols:, user_interface:)
     @board = board
-    @user_interface = user_interface
     @symbols = symbols
+    @user_interface = user_interface
   end
 
   def run
@@ -15,5 +15,5 @@ class Game
 
   private
 
-  attr_reader :board, :user_interface, :symbols
+  attr_reader :board, :symbols, :user_interface
 end

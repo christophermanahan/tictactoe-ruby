@@ -42,8 +42,8 @@ describe 'game' do
   it 'Displays the game board' do
     game = Game.new(
       board: MockBoard.new(0),
-      user_interface: user_interface,
-      symbols: %w[X O].cycle
+      symbols: %w[X O].cycle,
+      user_interface: user_interface
     )
     game.run
     expect(user_interface.log).to eq '[]'
@@ -52,8 +52,8 @@ describe 'game' do
   it 'Puts the current players move on the board if it is not full' do
     game = Game.new(
       board: MockBoard.new(1),
-      user_interface: user_interface,
-      symbols: %w[X O].cycle
+      symbols: %w[X O].cycle,
+      user_interface: user_interface
     )
     game.run
     expect(user_interface.log).to eq '[X 1]'
@@ -62,8 +62,8 @@ describe 'game' do
   it 'Puts the next players move on the board if it is still not full' do
     game = Game.new(
       board: MockBoard.new(2),
-      user_interface: user_interface,
-      symbols: %w[X O].cycle
+      symbols: %w[X O].cycle,
+      user_interface: user_interface
     )
     game.run
     expect(user_interface.log).to eq '[O 1]'
