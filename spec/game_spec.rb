@@ -22,64 +22,50 @@ class MockBoard
   end
 end
 
-class MockBoardFormatter
-  def format_board(board)
-    "|#{board}|"
-  end
-end
-
-class MockDisplayer
+class MockUserInterface
   attr_accessor :log
 
-  def display(formatted_string)
+  def display_board(formatted_string)
     self.log = formatted_string
   end
-end
 
-class MockInput
-  def get
+  def get_input
     '1'
   end
 end
 
 describe 'game' do
-  let(:displayer) do
-    MockDisplayer.new
+  let(:user_interface) do
+    MockUserInterface.new
   end
 
-  it 'Displays the formatted board' do
+  it 'Displays the game board' do
     game = Game.new(
       board: MockBoard.new(0),
-      board_formatter: MockBoardFormatter.new,
-      displayer: displayer,
-      input: MockInput.new,
-      symbols: %w[X O].cycle
+      symbols: %w[X O].cycle,
+      user_interface: user_interface
     )
     game.run
-    expect(displayer.log).to eq '|[]|'
+    expect(user_interface.log).to eq '[]'
   end
 
   it 'Puts the current players move on the board if it is not full' do
     game = Game.new(
       board: MockBoard.new(1),
-      board_formatter: MockBoardFormatter.new,
-      displayer: displayer,
-      input: MockInput.new,
-      symbols: %w[X O].cycle
+      symbols: %w[X O].cycle,
+      user_interface: user_interface
     )
     game.run
-    expect(displayer.log).to eq '|[X 1]|'
+    expect(user_interface.log).to eq '[X 1]'
   end
 
   it 'Puts the next players move on the board if it is still not full' do
     game = Game.new(
       board: MockBoard.new(2),
-      board_formatter: MockBoardFormatter.new,
-      displayer: displayer,
-      input: MockInput.new,
-      symbols: %w[X O].cycle
+      symbols: %w[X O].cycle,
+      user_interface: user_interface
     )
     game.run
-    expect(displayer.log).to eq '|[O 1]|'
+    expect(user_interface.log).to eq '[O 1]'
   end
 end

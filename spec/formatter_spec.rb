@@ -1,11 +1,11 @@
-require './lib/board_formatter'
+require './lib/formatter'
 
-describe 'board_formatter' do
-  let(:board_formatter) do
-    BoardFormatter.new
+describe 'formatter' do
+  let(:formatter) do
+    Formatter.new
   end
 
-  let(:rows) do
+  let(:board) do
     [['X', nil, nil], [nil, nil, nil], [nil, nil, nil]]
   end
 
@@ -19,7 +19,7 @@ describe 'board_formatter' do
     '+-----+-----+-----+'
   end
 
-  it 'Formats the rows into a printable board string' do
-    expect(board_formatter.format_board(rows)).to eq formatted_board_string
+  it 'Formats the board into a printable board string' do
+    expect(formatter.format(board)).to eq formatted_board_string
   end
 end
