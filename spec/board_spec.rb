@@ -7,8 +7,30 @@ describe 'board' do
   end
 
   it 'Retrieves the rows of the board' do
+    board.put('X', 2)
+    expect(board.rows).to eq [
+      [nil, 'X', nil],
+      [nil, nil, nil],
+      [nil, nil, nil]
+    ]
+  end
+
+  it 'Retrieves the columns of the board' do
+    board.put('X', 2)
+    expect(board.columns).to eq [
+      [nil, nil, nil],
+      ['X', nil, nil],
+      [nil, nil, nil]
+    ]
+  end
+
+  it 'Retreives the diagonals of the board' do
     board.put('X', 1)
-    expect(board.rows).to eq [['X', nil, nil], [nil, nil, nil], [nil, nil, nil]]
+    board.put('X', 3)
+    expect(board.diagonals).to eq [
+      ['X', nil, nil],
+      ['X', nil, nil]
+    ]
   end
 
   it 'Is false when the board is not full' do

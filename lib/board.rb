@@ -1,12 +1,26 @@
 class Board
   def initialize(cells)
     @cells = cells
+    @size = Math.sqrt(cells.size)
   end
 
   def rows
-    symbols = cells.map(&:symbol)
-    row_length = Math.sqrt(cells.size)
-    symbols.each_slice(row_length).to_a
+    symbols.each_slice(size).to_a
+  end
+
+  def columns
+    (0..size-1).inject([]) do |acc, mod|
+      acc << symbols.select.with_index do |_, i|
+        i % size == mod
+      end
+    end
+  end
+
+  def diagonals
+    diags = []
+    diags << symbols.select.with_index { |_, i| i % (size+1) == 0 }
+    right = symbols.select.with_index { |_, i| i % (size-1) == 0 }
+    diags << right[1..-2]
   end
 
   def full?
@@ -21,7 +35,11 @@ class Board
 
   private
 
-  attr_reader :cells
+  attr_reader :cells, :size, :symbols
+
+  def symbols
+    cells.map(&:symbol)
+  end
 
   def convert_position(position)
     position.to_i - 1
