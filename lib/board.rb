@@ -9,7 +9,7 @@ class Board
   end
 
   def columns
-    (0..size-1).inject([]) do |acc, mod|
+    (0..size - 1).inject([]) do |acc, mod|
       acc << symbols.select.with_index do |_, i|
         i % size == mod
       end
@@ -18,8 +18,8 @@ class Board
 
   def diagonals
     diags = []
-    diags << symbols.select.with_index { |_, i| i % (size+1) == 0 }
-    right = symbols.select.with_index { |_, i| i % (size-1) == 0 }
+    diags << symbols.select.with_index { |_, i| (i % (size + 1)).zero? }
+    right = symbols.select.with_index { |_, i| (i % (size - 1)).zero? }
     diags << right[1..-2]
   end
 
@@ -35,7 +35,7 @@ class Board
 
   private
 
-  attr_reader :cells, :size, :symbols
+  attr_reader :cells, :size
 
   def symbols
     cells.map(&:symbol)
