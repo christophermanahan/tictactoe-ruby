@@ -9,7 +9,7 @@ require './lib/game'
 class Main
   def start(io)
     cells = Array.new(9) { Cell.new }
-    symbols = %w[X O].cycle
+    symbols = %w[O X].cycle
     user_interface = UserInterface.new(
       formatter: Formatter.new,
       displayer: Displayer.new(io),
