@@ -35,17 +35,4 @@ describe 'board' do
       ]
     ]
   end
-
-  it 'Is false when the board is not full' do
-    board.put('X', 1)
-    board.put('O', 2)
-    expect(board.full?).to eq(false)
-  end
-
-  it 'Is true when the board is full' do
-    (1..9).each do |position|
-      board.put('X', position)
-    end
-    expect(board.full?).to eq(true)
-  end
 end

@@ -11,10 +11,6 @@ class Board
     [rows, columns, diagonals]
   end
 
-  def full?
-    cells.all? { |cell| !cell.empty? }
-  end
-
   def put(symbol, position)
     converted_position = convert_position(position)
     target_cell = cells[converted_position]

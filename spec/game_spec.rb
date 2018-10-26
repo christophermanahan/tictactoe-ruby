@@ -9,7 +9,7 @@ class MockBoard
   end
 
   def rows
-    if moves_until_full == 0
+    if moves_until_full.zero?
       [[latest_move.join(' ')]]
     else
       [[0, 1]]
