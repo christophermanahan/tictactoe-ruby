@@ -4,7 +4,7 @@ class Board
   end
 
   def combinations
-    [rows, columns, diagonals]
+    [rows.flatten, columns.flatten, diagonals.flatten]
   end
 
   def put(symbol, position)
@@ -30,7 +30,7 @@ class Board
   end
 
   def rows
-    symbols.each_slice(size).to_a
+    symbols.each_slice(size)
   end
 
   def columns
@@ -42,9 +42,9 @@ class Board
   end
 
   def diagonals
-    [0, size - 1].map do |j|
+    [0, size - 1].map do |start|
       rows.map.with_index do |_, i|
-        rows[i][i + j]
+        rows[i][(start - i).abs]
       end
     end
   end
