@@ -4,13 +4,11 @@ class Board
   end
 
   def rows
-    symbols = cells.map(&:symbol)
-    row_length = Math.sqrt(cells.size)
-    symbols.each_slice(row_length).to_a
+    symbols.each_slice(size).to_a
   end
 
-  def full?
-    cells.all? { |cell| !cell.empty? }
+  def combinations
+    rows + columns + diagonals
   end
 
   def put(symbol, position)
@@ -23,7 +21,31 @@ class Board
 
   attr_reader :cells
 
+  def symbols
+    cells.map(&:symbol)
+  end
+
+  def size
+    Math.sqrt(cells.size).to_i
+  end
+
   def convert_position(position)
     position.to_i - 1
+  end
+
+  def columns
+    rows.map.with_index do |_, i|
+      rows.map do |row|
+        row[i]
+      end
+    end
+  end
+
+  def diagonals
+    [0, size - 1].map do |start|
+      rows.map.with_index do |_, i|
+        rows[i][(start - i).abs]
+      end
+    end
   end
 end

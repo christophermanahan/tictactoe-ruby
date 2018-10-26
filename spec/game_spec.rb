@@ -8,12 +8,16 @@ class MockBoard
     @latest_move = []
   end
 
-  def rows
-    "[#{latest_move.join(' ')}]"
+  def combinations
+    rows
   end
 
-  def full?
-    moves_until_full == 0
+  def rows
+    if moves_until_full.zero?
+      [[latest_move.join(' ')]]
+    else
+      [[0, 1]]
+    end
   end
 
   def put(symbol, position)
@@ -25,7 +29,11 @@ end
 class MockUserInterface
   attr_accessor :log
 
-  def display_board(formatted_string)
+  def winner(formatted_string)
+    formatted_string
+  end
+
+  def display(formatted_string)
     self.log = formatted_string
   end
 
@@ -46,7 +54,7 @@ describe 'game' do
       user_interface: user_interface
     )
     game.run
-    expect(user_interface.log).to eq '[]'
+    expect(user_interface.log).to eq [['']]
   end
 
   it 'Puts the current players move on the board if it is not full' do
@@ -56,7 +64,7 @@ describe 'game' do
       user_interface: user_interface
     )
     game.run
-    expect(user_interface.log).to eq '[X 1]'
+    expect(user_interface.log).to eq [['X 1']]
   end
 
   it 'Puts the next players move on the board if it is still not full' do
@@ -66,6 +74,15 @@ describe 'game' do
       user_interface: user_interface
     )
     game.run
-    expect(user_interface.log).to eq '[O 1]'
+    expect(user_interface.log).to eq [['O 1']]
+  end
+
+  it 'Displays the winning player' do
+    game = Game.new(
+      board: MockBoard.new(2),
+      symbols: %w[X O].cycle,
+      user_interface: user_interface
+    )
+    expect(game.run).to eq 'X'
   end
 end

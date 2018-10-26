@@ -10,6 +10,10 @@ class UserInterface
     displayer.display(formatted)
   end
 
+  def winner(symbol)
+    displayer.display("#{symbol} won!")
+  end
+
   def get_input
     input.get
   end

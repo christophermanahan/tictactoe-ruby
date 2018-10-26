@@ -31,6 +31,10 @@ describe 'user_interface' do
     expect(user_interface.display('[]')).to eq '|[]|'
   end
 
+  it 'Diplays the winner' do
+    expect(user_interface.winner('X')).to eq 'X won!'
+  end
+
   it 'Receives user input' do
     expect(user_interface.get_input).to eq '1'
   end
