@@ -9,19 +9,8 @@ class MockBoard
   end
 
   def combinations
-    [rows, rows, rows]
+    rows
   end
-
-  def full?
-    moves_until_full == 0
-  end
-
-  def put(symbol, position)
-    self.moves_until_full -= 1
-    self.latest_move = [symbol, position]
-  end
-
-  private
 
   def rows
     if moves_until_full.zero?
@@ -29,6 +18,11 @@ class MockBoard
     else
       [[0, 1]]
     end
+  end
+
+  def put(symbol, position)
+    self.moves_until_full -= 1
+    self.latest_move = [symbol, position]
   end
 end
 

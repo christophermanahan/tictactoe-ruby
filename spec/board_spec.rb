@@ -11,20 +11,14 @@ describe 'board' do
     board.put('X', 3)
     board.put('X', 9)
     expect(board.combinations).to eq [
-      [
-        ['X', nil, 'X'],
-        [nil, nil, nil],
-        [nil, nil, 'X']
-      ],
-      [
-        ['X', nil, nil],
-        [nil, nil, nil],
-        ['X', nil, 'X']
-      ],
-      [
-        ['X', nil, 'X'],
-        ['X', nil, nil]
-      ]
+      ['X', nil, 'X'],
+      [nil, nil, nil],
+      [nil, nil, 'X'],
+      ['X', nil, nil],
+      [nil, nil, nil],
+      ['X', nil, 'X'],
+      ['X', nil, 'X'],
+      ['X', nil, nil]
     ]
   end
 end

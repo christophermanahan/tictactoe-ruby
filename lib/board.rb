@@ -3,8 +3,12 @@ class Board
     @cells = cells
   end
 
+  def rows
+    symbols.each_slice(size).to_a
+  end
+
   def combinations
-    [rows.flatten, columns.flatten, diagonals.flatten]
+    rows + columns + diagonals
   end
 
   def put(symbol, position)
@@ -27,10 +31,6 @@ class Board
 
   def convert_position(position)
     position.to_i - 1
-  end
-
-  def rows
-    symbols.each_slice(size)
   end
 
   def columns
