@@ -15,21 +15,24 @@ describe 'board' do
     ]
   end
 
-  it 'Retrieves the columns of the board' do
-    board.put('X', 2)
-    expect(board.columns).to eq [
-      [nil, nil, nil],
-      ['X', nil, nil],
-      [nil, nil, nil]
-    ]
-  end
-
-  it 'Retreives the diagonals of the board' do
+  it 'Retrieves the combinations of the board' do
     board.put('X', 1)
     board.put('X', 3)
-    expect(board.diagonals).to eq [
-      ['X', nil, nil],
-      ['X', nil, nil]
+    expect(board.combinations).to eq [
+      [
+        ['X', nil, 'X'],
+        [nil, nil, nil],
+        [nil, nil, nil]
+      ],
+      [
+        ['X', nil, nil],
+        [nil, nil, nil],
+        ['X', nil, nil]
+      ],
+      [
+        ['X', nil, nil],
+        ['X', nil, nil]
+      ]
     ]
   end
 

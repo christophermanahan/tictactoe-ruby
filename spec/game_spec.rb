@@ -16,12 +16,8 @@ class MockBoard
     end
   end
 
-  def columns
-    rows
-  end
-
-  def diagonals
-    rows
+  def combinations
+    [rows, rows, rows]
   end
 
   def full?

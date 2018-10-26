@@ -7,7 +7,7 @@ class Game
 
   def run
     user_interface.display(board.rows)
-    if win?([board.rows, board.columns, board.diagonals])
+    if win?
       user_interface.winner(symbols.first)
     else
       board.put(symbols.next, user_interface.get_input)
@@ -19,8 +19,8 @@ class Game
 
   attr_reader :board, :symbols, :user_interface
 
-  def win?(combinations)
-    combinations.any? do |combination|
+  def win?
+    board.combinations.any? do |combination|
       combination.any? do |in_a_row|
         unique = in_a_row.uniq
         !unique.first.nil? && unique.size == 1
