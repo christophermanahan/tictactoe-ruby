@@ -6,15 +6,6 @@ describe 'board' do
     Board.new(Array.new(9) { Cell.new })
   end
 
-  it 'Retrieves the rows of the board' do
-    board.put('X', 2)
-    expect(board.rows).to eq [
-      [nil, 'X', nil],
-      [nil, nil, nil],
-      [nil, nil, nil]
-    ]
-  end
-
   it 'Retrieves the combinations of the board' do
     board.put('X', 1)
     board.put('X', 3)

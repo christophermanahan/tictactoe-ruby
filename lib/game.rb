@@ -6,7 +6,7 @@ class Game
   end
 
   def run
-    user_interface.display(board.rows)
+    user_interface.display(board.combinations.first)
     if win?
       user_interface.winner(symbols.first)
     else

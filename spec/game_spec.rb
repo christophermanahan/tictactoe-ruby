@@ -8,14 +8,6 @@ class MockBoard
     @latest_move = []
   end
 
-  def rows
-    if moves_until_full.zero?
-      [[latest_move.join(' ')]]
-    else
-      [[0, 1]]
-    end
-  end
-
   def combinations
     [rows, rows, rows]
   end
@@ -27,6 +19,16 @@ class MockBoard
   def put(symbol, position)
     self.moves_until_full -= 1
     self.latest_move = [symbol, position]
+  end
+
+  private
+
+  def rows
+    if moves_until_full.zero?
+      [[latest_move.join(' ')]]
+    else
+      [[0, 1]]
+    end
   end
 end
 
