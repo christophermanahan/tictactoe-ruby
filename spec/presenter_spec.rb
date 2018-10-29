@@ -29,7 +29,7 @@ describe 'presenter' do
 
   let(:test_message) { 'message' }
 
-  let(:clear_message) { "\e[H\e[2J" }
+  let(:clear) { "\e[H\e[2J" }
 
   let(:formatted_board_string) do
     "+-----+-----+-----+\n"\
@@ -44,17 +44,17 @@ describe 'presenter' do
   it 'clears the display' do
     presenter = Presenter.new(
       displayer: displayer,
-      clear_message: clear_message,
+      clear: clear,
       board: board
     )
     presenter.present(test_message)
-    expect(displayer.log.first).to eq clear_message
+    expect(displayer.log.first).to eq clear
   end
 
   it 'displays the board' do
     presenter = Presenter.new(
       displayer: displayer,
-      clear_message: clear_message,
+      clear: clear,
       board: board
     )
     presenter.present(test_message)
@@ -64,7 +64,7 @@ describe 'presenter' do
   it 'displays the message' do
     presenter = Presenter.new(
       displayer: displayer,
-      clear_message: clear_message,
+      clear: clear,
       board: board
     )
     presenter.present(test_message)

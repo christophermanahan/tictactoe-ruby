@@ -1,19 +1,19 @@
 class Presenter
-  def initialize(displayer:, clear_message:, board:)
+  def initialize(displayer:, clear:, board:)
     @displayer = displayer
-    @clear_message = clear_message
+    @clear = clear
     @board = board
   end
 
   def present(message)
-    [clear_message, format_board, message].each do |render|
+    [clear, format_board, message].each do |render|
       displayer.display(render)
     end
   end
 
   private
 
-  attr_reader :displayer, :board, :clear_message
+  attr_reader :displayer, :board, :clear
 
   def format_board
     rows = flat_board.each_slice(board.size).to_a
