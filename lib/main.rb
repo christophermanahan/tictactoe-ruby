@@ -1,27 +1,25 @@
-# require './lib/cell'
-# require './lib/formatter'
-# require './lib/displayer'
-# require './lib/input'
-# require './lib/user_interface'
-# require './lib/board'
-# require './lib/game'
+require './lib/cell'
+require './lib/displayer'
+require './lib/messages'
+require './lib/board'
+require './lib/input'
+require './lib/presenter'
+require './lib/game'
 
-# class Main
-#   def start(io)
-#     cells = Array.new(9) { Cell.new }
-#     symbols = %w[O X].cycle
-#     user_interface = UserInterface.new(
-#       formatter: Formatter.new,
-#       displayer: Displayer.new(io),
-#       input: Input.new(io)
-#     )
-
-#     game = Game.new(
-#       board: Board.new(cells),
-#       symbols: symbols,
-#       user_interface: user_interface
-#     )
-
-#     game.run
-#   end
-# end
+class Main
+  def start(io, clear)
+    cells = Array.new(9) { Cell.new }
+    symbols = %w[O X].cycle
+    presenter = Presenter.new(
+      displayer: Displayer.new(io),
+      clear: clear
+    )
+    Game.new(
+      presenter: presenter,
+      input: Input.new(io),
+      board: Board.new(cells),
+      symbols: symbols,
+      messages: Messages.new
+    ).run
+  end
+end

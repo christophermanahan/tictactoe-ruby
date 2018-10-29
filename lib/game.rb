@@ -1,10 +1,10 @@
 class Game
-  def initialize(board:, symbols:, presenter:, input:, messages:)
+  def initialize(board:, symbols:, messages:, input:, presenter:)
     @board = board
     @symbols = symbols
-    @presenter = presenter
-    @input = input
     @messages = messages
+    @input = input
+    @presenter = presenter
   end
 
   def run
@@ -13,7 +13,7 @@ class Game
 
   private
 
-  attr_reader :board, :symbols, :presenter, :messages, :input
+  attr_reader :board, :symbols, :messages, :input, :presenter
 
   def win?
     board.combinations.any? do |in_a_row|

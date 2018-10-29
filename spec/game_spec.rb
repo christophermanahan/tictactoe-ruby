@@ -23,6 +23,22 @@ class MovesUntilFullBoard
   end
 end
 
+class FakeMessages
+  def current(player:)
+    "current #{player}"
+  end
+
+  def winning(player:)
+    "winning #{player}"
+  end
+end
+
+class GetOneInput
+  def get
+    '1'
+  end
+end
+
 class FakePresenter
   attr_accessor :log
 
@@ -36,37 +52,23 @@ class FakePresenter
   end
 end
 
-class GetOneInput
-  def get
-    '1'
-  end
-end
-
-class FakeMessages
-  def current(player:)
-    "current #{player}"
-  end
-
-  def winning(player:)
-    "winning #{player}"
-  end
-end
-
 describe 'game' do
-  let(:presenter) { FakePresenter.new }
+  let(:symbols) { %w[O X].cycle }
+
+  let(:messages) { FakeMessages.new }
 
   let(:input) { GetOneInput.new }
 
-  let(:messages) { FakeMessages.new }
+  let(:presenter) { FakePresenter.new }
 
   it 'Puts the current players move on the board if it is not full' do
     board = MovesUntilFullBoard.new(1)
     game = Game.new(
       board: board,
-      symbols: %w[O X].cycle,
-      presenter: presenter,
+      symbols: symbols,
+      messages: messages,
       input: input,
-      messages: messages
+      presenter: presenter
     )
     game.run
     expect(board.latest_move).to eq %w[X 1]
@@ -76,10 +78,10 @@ describe 'game' do
     board = MovesUntilFullBoard.new(2)
     game = Game.new(
       board: board,
-      symbols: %w[O X].cycle,
-      presenter: presenter,
+      symbols: symbols,
+      messages: messages,
       input: input,
-      messages: messages
+      presenter: presenter
     )
     game.run
     expect(board.latest_move).to eq %w[O 1]
@@ -89,10 +91,10 @@ describe 'game' do
     board = MovesUntilFullBoard.new(2)
     game = Game.new(
       board: board,
-      symbols: %w[O X].cycle,
-      presenter: presenter,
+      symbols: symbols,
+      messages: messages,
       input: input,
-      messages: messages
+      presenter: presenter
     )
     game.run
     expect(presenter.log.include?('current X')).to eq true
@@ -102,10 +104,10 @@ describe 'game' do
     board = MovesUntilFullBoard.new(2)
     game = Game.new(
       board: board,
-      symbols: %w[O X].cycle,
-      presenter: presenter,
+      symbols: symbols,
+      messages: messages,
       input: input,
-      messages: messages
+      presenter: presenter
     )
     game.run
     expect(presenter.log.include?('current O')).to eq true
@@ -115,10 +117,10 @@ describe 'game' do
     board = MovesUntilFullBoard.new(2)
     game = Game.new(
       board: board,
-      symbols: %w[O X].cycle,
-      presenter: presenter,
+      symbols: symbols,
+      messages: messages,
       input: input,
-      messages: messages
+      presenter: presenter
     )
     game.run
     expect(presenter.log.include?('board')).to eq true
@@ -128,10 +130,10 @@ describe 'game' do
     board = MovesUntilFullBoard.new(3)
     game = Game.new(
       board: board,
-      symbols: %w[O X].cycle,
-      presenter: presenter,
+      symbols: symbols,
+      messages: messages,
       input: input,
-      messages: messages
+      presenter: presenter
     )
     game.run
     expect(presenter.log.last).to eq 'winning X'

@@ -22,7 +22,7 @@ class Presenter
 
   def fill(board)
     (1..board.size).to_a.map do |position|
-      symbol = board[position]
+      symbol = board[position - 1]
       symbol.nil? ? position : symbol
     end
   end
