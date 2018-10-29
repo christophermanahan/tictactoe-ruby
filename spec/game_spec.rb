@@ -50,7 +50,7 @@ describe 'game' do
   it 'Displays the game board' do
     game = Game.new(
       board: MockBoard.new(0),
-      symbols: %w[X O].cycle,
+      symbols: %w[O X].cycle,
       user_interface: user_interface
     )
     game.run
@@ -60,7 +60,7 @@ describe 'game' do
   it 'Puts the current players move on the board if it is not full' do
     game = Game.new(
       board: MockBoard.new(1),
-      symbols: %w[X O].cycle,
+      symbols: %w[O X].cycle,
       user_interface: user_interface
     )
     game.run
@@ -70,7 +70,7 @@ describe 'game' do
   it 'Puts the next players move on the board if it is still not full' do
     game = Game.new(
       board: MockBoard.new(2),
-      symbols: %w[X O].cycle,
+      symbols: %w[O X].cycle,
       user_interface: user_interface
     )
     game.run
@@ -79,8 +79,8 @@ describe 'game' do
 
   it 'Displays the winning player' do
     game = Game.new(
-      board: MockBoard.new(2),
-      symbols: %w[X O].cycle,
+      board: MockBoard.new(3),
+      symbols: %w[O X].cycle,
       user_interface: user_interface
     )
     expect(game.run).to eq 'X'

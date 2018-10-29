@@ -8,9 +8,10 @@ class Game
   def run
     user_interface.display(board.rows)
     if win?
-      user_interface.winner(symbols.first)
+      user_interface.winner(symbols.peek)
     else
-      board.put(symbols.next, user_interface.get_input)
+      symbols.next
+      board.put(symbols.peek, user_interface.get_input)
       run
     end
   end
