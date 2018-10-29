@@ -1,6 +1,6 @@
 class Messages
   def current(player:)
-    "Player #{player} choose a board position!"
+    "Player #{player} choose a position!"
   end
 
   def winning(player:)

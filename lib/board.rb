@@ -8,14 +8,14 @@ class Board
     rows + columns + diagonals
   end
 
-  def get(position)
+  def get(position:)
     converted_position = convert_position(position)
     target_cell = cells[converted_position]
     target_cell.symbol
   end
 
-  def put(symbol, position)
-    converted_position = convert_position(position)
+  def put(symbol:, at:)
+    converted_position = convert_position(at)
     target_cell = cells[converted_position]
     target_cell.fill(symbol)
   end

@@ -1,29 +1,37 @@
 class Game
-  def initialize(board:, symbols:, user_interface:)
+  def initialize(board:, symbols:, presenter:, input:, messages:)
     @board = board
     @symbols = symbols
-    @user_interface = user_interface
+    @presenter = presenter
+    @input = input
+    @messages = messages
   end
 
   def run
-    user_interface.display(board.rows)
-    if win?
-      user_interface.winner(symbols.peek)
-    else
-      symbols.next
-      board.put(symbols.peek, user_interface.get_input)
-      run
-    end
+    win? ? won : continue
   end
 
   private
 
-  attr_reader :board, :symbols, :user_interface
+  attr_reader :board, :symbols, :presenter, :messages, :input
 
   def win?
     board.combinations.any? do |in_a_row|
       unique = in_a_row.uniq
       !unique.first.nil? && unique.size == 1
     end
+  end
+
+  def won
+    message = messages.winning(player: symbols.peek)
+    presenter.present(message)
+  end
+
+  def continue
+    symbols.next
+    message = messages.current(player: symbols.peek)
+    presenter.present(message)
+    board.put(symbol: symbols.peek, at: input.get)
+    run
   end
 end

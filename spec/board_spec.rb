@@ -7,14 +7,14 @@ describe 'board' do
   end
 
   it 'Retrieves the symbol at a position' do
-    board.put('X', 1)
-    expect(board.get(1)).to eq 'X'
+    board.put(symbol: 'X', at: 1)
+    expect(board.get(position: 1)).to eq 'X'
   end
 
   it 'Retrieves the combinations of the board' do
-    board.put('X', 1)
-    board.put('X', 3)
-    board.put('X', 9)
+    board.put(symbol: 'X', at: 1)
+    board.put(symbol: 'X', at: 3)
+    board.put(symbol: 'X', at: 9)
     expect(board.combinations).to eq [
       ['X', nil, 'X'],
       [nil, nil, nil],

@@ -1,10 +1,10 @@
 require './lib/messages'
 
 describe 'messages' do
-  let (:messages) { Messages.new }
+  let(:messages) { Messages.new }
 
   it 'builds a current player message' do
-    expect(messages.current(player: 'X')).to eq 'Player X choose a board position!'
+    expect(messages.current(player: 'X')).to eq 'Player X choose a position!'
   end
 
   it 'builds a winning player message' do
