@@ -2,13 +2,19 @@ require './lib/game'
 
 class MovesUntilFullBoard
   attr_accessor :moves_until_full, :latest_move
+  attr_reader :size
 
   def initialize(moves_until_full)
     @moves_until_full = moves_until_full
+    @size = 1
   end
 
   def combinations
     moves_until_full.zero? ? [[0]] : [[0, 1]]
+  end
+
+  def get(*)
+    'board'
   end
 
   def put(symbol:, at:)
@@ -24,7 +30,8 @@ class FakePresenter
     @log = []
   end
 
-  def present(message)
+  def present(board:, message:)
+    log << board.first
     log << message
   end
 end
@@ -78,7 +85,7 @@ describe 'game' do
     expect(board.latest_move).to eq %w[O 1]
   end
 
-  it 'Displays the current player' do
+  it 'Displays the first player message' do
     board = MovesUntilFullBoard.new(2)
     game = Game.new(
       board: board,
@@ -88,7 +95,33 @@ describe 'game' do
       messages: messages
     )
     game.run
-    expect(presenter.log).to eq ['current X', 'current O', 'winning O']
+    expect(presenter.log.include?('current X')).to eq true
+  end
+
+  it 'Displays the second player message' do
+    board = MovesUntilFullBoard.new(2)
+    game = Game.new(
+      board: board,
+      symbols: %w[O X].cycle,
+      presenter: presenter,
+      input: input,
+      messages: messages
+    )
+    game.run
+    expect(presenter.log.include?('current O')).to eq true
+  end
+
+  it 'Displays the board' do
+    board = MovesUntilFullBoard.new(2)
+    game = Game.new(
+      board: board,
+      symbols: %w[O X].cycle,
+      presenter: presenter,
+      input: input,
+      messages: messages
+    )
+    game.run
+    expect(presenter.log.include?('board')).to eq true
   end
 
   it 'Displays the winning player' do

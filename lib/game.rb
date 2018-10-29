@@ -23,15 +23,21 @@ class Game
   end
 
   def won
-    message = messages.winning(player: symbols.peek)
-    presenter.present(message)
+    winning = messages.winning(player: symbols.peek)
+    presenter.present(board: flat, message: winning)
   end
 
   def continue
     symbols.next
-    message = messages.current(player: symbols.peek)
-    presenter.present(message)
+    current_player = messages.current(player: symbols.peek)
+    presenter.present(board: flat, message: current_player)
     board.put(symbol: symbols.peek, at: input.get)
     run
+  end
+
+  def flat
+    (1..board.size).to_a.map do |position|
+      board.get(position: position)
+    end
   end
 end

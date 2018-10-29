@@ -1,42 +1,42 @@
 class Presenter
-  def initialize(displayer:, clear:, board:)
+  def initialize(displayer:, clear:)
     @displayer = displayer
     @clear = clear
-    @board = board
   end
 
-  def present(message)
-    [clear, format_board, message].each do |render|
+  def present(board:, message:)
+    [clear, format_board(board), message].each do |render|
       displayer.display(render)
     end
   end
 
   private
 
-  attr_reader :displayer, :board, :clear
+  attr_reader :displayer, :clear, :size
 
-  def format_board
-    rows = flat_board.each_slice(board.size).to_a
-    format_builder(rows).join("\n")
+  def format_board(board)
+    size = Math.sqrt(board.size)
+    rows = fill(board).each_slice(size).to_a
+    format_builder(rows, size).join("\n")
   end
 
-  def flat_board
-    (1..board.size**2).to_a.map do |position|
-      symbol = board.get(position)
+  def fill(board)
+    (1..board.size).to_a.map do |position|
+      symbol = board[position]
       symbol.nil? ? position : symbol
     end
   end
 
-  def format_builder(rows)
-    rows.inject([divider]) do |acc, row|
+  def format_builder(rows, size)
+    rows.inject([divider(size)]) do |acc, row|
       acc << row_string(row)
-      acc << divider
+      acc << divider(size)
       acc
     end
   end
 
-  def divider
-    "+#{Array.new(board.size).fill('-----').join('+')}+"
+  def divider(size)
+    "+#{Array.new(size).fill('-----').join('+')}+"
   end
 
   def row_string(row)
