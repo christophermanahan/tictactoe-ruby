@@ -6,6 +6,11 @@ describe 'board' do
     Board.new(Array.new(9) { Cell.new })
   end
 
+  it 'Retrieves the symbol at a position' do
+    board.put('X', 1)
+    expect(board.get(1)).to eq 'X'
+  end
+
   it 'Retrieves the combinations of the board' do
     board.put('X', 1)
     board.put('X', 3)

@@ -1,31 +1,5 @@
 require './lib/game'
 
-class MockBoard
-  attr_accessor :moves_until_full, :latest_move
-
-  def initialize(moves_until_full)
-    @moves_until_full = moves_until_full
-    @latest_move = []
-  end
-
-  def combinations
-    rows
-  end
-
-  def rows
-    if moves_until_full.zero?
-      [[latest_move.join(' ')]]
-    else
-      [[0, 1]]
-    end
-  end
-
-  def put(symbol, position)
-    self.moves_until_full -= 1
-    self.latest_move = [symbol, position]
-  end
-end
-
 class MockUserInterface
   attr_accessor :log
 
@@ -43,6 +17,32 @@ class MockUserInterface
 end
 
 describe 'game' do
+  class MockBoard
+    attr_accessor :moves_until_full, :latest_move
+
+    def initialize(moves_until_full)
+      @moves_until_full = moves_until_full
+      @latest_move = []
+    end
+
+    def combinations
+      rows
+    end
+
+    def rows
+      if moves_until_full.zero?
+        [[latest_move.join(' ')]]
+      else
+        [[0, 1]]
+      end
+    end
+
+    def put(symbol, position)
+      self.moves_until_full -= 1
+      self.latest_move = [symbol, position]
+    end
+  end
+
   let(:user_interface) do
     MockUserInterface.new
   end
