@@ -36,7 +36,7 @@ class Game
   end
 
   def flat
-    (1..board.size).to_a.map do |position|
+    (1..board.size**2).to_a.map do |position|
       board.get(position: position)
     end
   end

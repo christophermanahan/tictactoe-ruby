@@ -3,7 +3,7 @@ require './lib/cell'
 
 describe 'board' do
   let(:board) do
-    Board.new(Array.new(9) { Cell.new })
+    Board.new(Array.new(9) { Cell.new }, 3)
   end
 
   it 'Retrieves the symbol at a position' do

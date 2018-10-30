@@ -1,10 +1,9 @@
 class Board
   attr_reader :size
 
-  def initialize(cells)
+  def initialize(cells, size)
     @cells = cells
-    @size = cells.size
-    @square = Math.sqrt(size)
+    @size = size
   end
 
   def combinations
@@ -25,7 +24,7 @@ class Board
 
   private
 
-  attr_reader :cells, :square
+  attr_reader :cells
 
   def symbols
     cells.map(&:symbol)
@@ -36,7 +35,7 @@ class Board
   end
 
   def rows
-    symbols.each_slice(square).to_a
+    symbols.each_slice(size).to_a
   end
 
   def columns
@@ -48,7 +47,7 @@ class Board
   end
 
   def diagonals
-    [0, square - 1].map do |start|
+    [0, size - 1].map do |start|
       rows.map.with_index do |_, i|
         rows[i][(start - i).abs]
       end
