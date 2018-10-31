@@ -13,6 +13,12 @@ describe 'presenter' do
     end
   end
 
+  class FakeFormatter
+    def format(*)
+      'board'
+    end
+  end
+
   class GetOnlyBoard
     attr_reader :size
 
@@ -28,7 +34,8 @@ describe 'presenter' do
   def default_presenter(displayer)
     Presenter.new(
       displayer: displayer,
-      clear: clear
+      clear: clear,
+      formatter: FakeFormatter.new
     )
   end
 
@@ -40,16 +47,6 @@ describe 'presenter' do
 
   let(:test_message) { 'message' }
 
-  let(:formatted_board_string) do
-    "+-----+-----+-----+\n"\
-    "|  1  |  2  |  3  |\n"\
-    "+-----+-----+-----+\n"\
-    "|  4  |  5  |  6  |\n"\
-    "+-----+-----+-----+\n"\
-    "|  7  |  8  |  9  |\n"\
-    '+-----+-----+-----+'
-  end
-
   it 'clears the display' do
     presenter = default_presenter(displayer)
     presenter.present(board: board, message: test_message)
@@ -59,7 +56,7 @@ describe 'presenter' do
   it 'displays the board' do
     presenter = default_presenter(displayer)
     presenter.present(board: board, message: test_message)
-    expect(displayer.log.include?(formatted_board_string)).to eq true
+    expect(displayer.log.include?('board')).to eq true
   end
 
   it 'displays the message' do
