@@ -1,18 +1,19 @@
 class Formatter
-  def initialize(colorizer)
+  def initialize(colorizer:, symbols:)
     @colorizer = colorizer
+    @symbols = symbols
   end
 
   def format(board)
     flattened = flatten(board)
-    replaced = color_and_replace_nil(flattened)
-    rows = replaced.each_slice(board.size).to_a
+    colored = color_and_replace_nil(flattened)
+    rows = colored.each_slice(board.size).to_a
     rows_and_dividers(rows).join("\n")
   end
 
   private
 
-  attr_reader :colorizer
+  attr_reader :colorizer, :symbols
 
   def flatten(board)
     (1..board.size**2).to_a.map do |position|
@@ -25,10 +26,10 @@ class Formatter
       case symbol
       when nil
         colorizer.magenta(convert(position))
-      when 'X'
-        colorizer.cyan(symbol)
-      when 'O'
+      when symbols.first
         colorizer.yellow(symbol)
+      when symbols.last
+        colorizer.cyan(symbol)
       end
     end
   end

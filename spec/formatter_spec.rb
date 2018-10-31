@@ -38,7 +38,10 @@ describe 'formatter' do
   end
 
   it 'formats the board' do
-    formatter = Formatter.new(FakeColorizer.new)
+    formatter = Formatter.new(
+      colorizer: FakeColorizer.new,
+      symbols: %w[O W]
+    )
     board = NilOnlyBoard.new(3)
     expect(formatter.format(board)).to eq formatted_board_string
   end
