@@ -10,15 +10,13 @@ class Board
     rows + columns + diagonals
   end
 
-  def get(position:)
-    converted_position = convert_position(position)
-    target_cell = cells[converted_position]
+  def get(at:)
+    target_cell = cells[convert(position: at)]
     target_cell.symbol
   end
 
   def put(symbol:, at:)
-    converted_position = convert_position(at)
-    target_cell = cells[converted_position]
+    target_cell = cells[convert(position: at)]
     target_cell.fill(symbol)
   end
 
@@ -30,7 +28,7 @@ class Board
     cells.map(&:symbol)
   end
 
-  def convert_position(position)
+  def convert(position:)
     position.to_i - 1
   end
 

@@ -20,8 +20,8 @@ describe 'presenter' do
       @size = size
     end
 
-    def get(position:)
-      position
+    def get(at:)
+      at
     end
   end
 

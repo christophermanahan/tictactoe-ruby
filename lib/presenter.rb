@@ -17,7 +17,7 @@ class Presenter
 
   def flatten(board)
     (1..board.size**2).to_a.map do |position|
-      board.get(position: position)
+      board.get(at: position)
     end
   end
 

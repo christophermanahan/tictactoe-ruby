@@ -8,7 +8,7 @@ describe 'board' do
 
   it 'Retrieves the symbol at a position' do
     board.put(symbol: 'X', at: 1)
-    expect(board.get(position: 1)).to eq 'X'
+    expect(board.get(at: 1)).to eq 'X'
   end
 
   it 'Retrieves the combinations of the board' do
