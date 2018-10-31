@@ -1,13 +1,13 @@
 class Colorizer
   def magenta(string)
-    "#{string} \e[35mMagenta"
-  end
-
-  def blue(string)
-    "#{string} \e[34mBlue"
+    "\e[35m#{string}\e[0m"
   end
 
   def cyan(string)
-    "#{string} \e[36mCyan"
+    "\e[36m#{string}\e[0m"
+  end
+
+  def yellow(string)
+    "\e[33m#{string}\e[0m"
   end
 end
