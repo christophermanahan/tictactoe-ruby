@@ -16,7 +16,7 @@ class Formatter
 
   def replace_nil_with_position(flattened)
     flattened.map.with_index do |symbol, position|
-      symbol.nil? ? position + 1 : symbol
+      symbol.nil? ? convert(position) : symbol
     end
   end
 
@@ -34,5 +34,9 @@ class Formatter
 
   def bordered_row(row)
     "|  #{row.join('  |  ')}  |"
+  end
+
+  def convert(position)
+    (position + 1).to_s
   end
 end
