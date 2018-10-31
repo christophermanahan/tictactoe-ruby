@@ -3,6 +3,7 @@ require './lib/displayer'
 require './lib/messages'
 require './lib/board'
 require './lib/input'
+require './lib/formatter'
 require './lib/presenter'
 require './lib/game'
 
@@ -12,14 +13,15 @@ class Main
     symbols = %w[O X].cycle
     presenter = Presenter.new(
       displayer: Displayer.new(io),
-      clear: clear_console
+      clear: clear_console,
+      formatter: Formatter.new
     )
     Game.new(
-      presenter: presenter,
-      input: Input.new(io),
       board: Board.new(cells, default_board_size),
       symbols: symbols,
-      messages: Messages.new
+      messages: Messages.new,
+      input: Input.new(io),
+      presenter: presenter
     ).run
   end
 end
