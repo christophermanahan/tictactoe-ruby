@@ -23,20 +23,20 @@ class Presenter
 
   def format(board)
     size = Math.sqrt(board.size)
-    rows = fill(board).each_slice(size).to_a
-    format_builder(rows, size).join("\n")
+    rows = replace_nil(board).each_slice(size).to_a
+    rows_and_dividers(rows, size).join("\n")
   end
 
-  def fill(board)
+  def replace_nil(board)
     (1..board.size).to_a.map do |position|
       symbol = board[position - 1]
       symbol.nil? ? position : symbol
     end
   end
 
-  def format_builder(rows, size)
+  def rows_and_dividers(rows, size)
     rows.inject([divider(size)]) do |acc, row|
-      acc << row_string(row)
+      acc << bordered_row(row)
       acc << divider(size)
       acc
     end
@@ -46,7 +46,7 @@ class Presenter
     "+#{Array.new(size).fill('-----').join('+')}+"
   end
 
-  def row_string(row)
+  def bordered_row(row)
     "|  #{row.join('  |  ')}  |"
   end
 end
