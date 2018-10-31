@@ -1,27 +1,27 @@
 require './lib/cell'
-require './lib/formatter'
 require './lib/displayer'
-require './lib/input'
-require './lib/user_interface'
+require './lib/messages'
 require './lib/board'
+require './lib/input'
+require './lib/formatter'
+require './lib/presenter'
 require './lib/game'
 
 class Main
-  def start(io)
-    cells = Array.new(9) { Cell.new }
+  def start(io, clear_console, default_board_size)
+    cells = Array.new(default_board_size**2) { Cell.new }
     symbols = %w[O X].cycle
-    user_interface = UserInterface.new(
-      formatter: Formatter.new,
+    presenter = Presenter.new(
       displayer: Displayer.new(io),
-      input: Input.new(io)
+      clear: clear_console,
+      formatter: Formatter.new
     )
-
-    game = Game.new(
-      board: Board.new(cells),
+    Game.new(
+      board: Board.new(cells, default_board_size),
       symbols: symbols,
-      user_interface: user_interface
-    )
-
-    game.run
+      messages: Messages.new,
+      input: Input.new(io),
+      presenter: presenter
+    ).run
   end
 end

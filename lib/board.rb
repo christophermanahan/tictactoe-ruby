@@ -1,19 +1,22 @@
 class Board
-  def initialize(cells)
-    @cells = cells
-  end
+  attr_reader :size
 
-  def rows
-    symbols.each_slice(size).to_a
+  def initialize(cells, size)
+    @cells = cells
+    @size = size
   end
 
   def combinations
     rows + columns + diagonals
   end
 
-  def put(symbol, position)
-    converted_position = convert_position(position)
-    target_cell = cells[converted_position]
+  def get(at:)
+    target_cell = cells[convert(position: at)]
+    target_cell.symbol
+  end
+
+  def put(symbol:, at:)
+    target_cell = cells[convert(position: at)]
     target_cell.fill(symbol)
   end
 
@@ -25,12 +28,12 @@ class Board
     cells.map(&:symbol)
   end
 
-  def size
-    Math.sqrt(cells.size).to_i
+  def convert(position:)
+    position.to_i - 1
   end
 
-  def convert_position(position)
-    position.to_i - 1
+  def rows
+    symbols.each_slice(size).to_a
   end
 
   def columns

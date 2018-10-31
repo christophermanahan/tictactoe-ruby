@@ -22,3 +22,6 @@ Naming/AccessorMethodName:
 
 Metrics/AbcSize:
   Enabled: false
+
+Style/EachWithObject:
+  Enabled: false

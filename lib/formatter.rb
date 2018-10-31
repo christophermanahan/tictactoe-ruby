@@ -1,29 +1,30 @@
 class Formatter
   def format(board)
-    filled_board = fill_empty_positions(board)
-    board_builder(filled_board, board.size, formatted_board = [])
-    formatted_board.join("\n")
+    flattened = flatten(board)
+    replaced = replace_nil_with_position(flattened)
+    rows = replaced.each_slice(board.size).to_a
+    rows_and_dividers(rows).join("\n")
   end
 
   private
 
-  def fill_empty_positions(board)
-    flat = board.flatten
-    flat.map!.with_index do |symbol, position|
-      symbol || convert_position(position)
+  def flatten(board)
+    (1..board.size**2).to_a.map do |position|
+      board.get(at: position)
     end
-    flat.each_slice(board.size).to_a
   end
 
-  def convert_position(position)
-    (position + 1).to_s
+  def replace_nil_with_position(flattened)
+    flattened.map.with_index do |symbol, position|
+      symbol.nil? ? position + 1 : symbol
+    end
   end
 
-  def board_builder(board, size, formatted_board)
-    formatted_board << divider(size)
-    board.each do |row|
-      formatted_board << row_string(row)
-      formatted_board << divider(size)
+  def rows_and_dividers(rows)
+    rows.inject([divider(rows.size)]) do |acc, row|
+      acc << bordered_row(row)
+      acc << divider(rows.size)
+      acc
     end
   end
 
@@ -31,7 +32,7 @@ class Formatter
     "+#{Array.new(size).fill('-----').join('+')}+"
   end
 
-  def row_string(row)
+  def bordered_row(row)
     "|  #{row.join('  |  ')}  |"
   end
 end

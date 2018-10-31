@@ -3,13 +3,18 @@ require './lib/cell'
 
 describe 'board' do
   let(:board) do
-    Board.new(Array.new(9) { Cell.new })
+    Board.new(Array.new(9) { Cell.new }, 3)
+  end
+
+  it 'Retrieves the symbol at a position' do
+    board.put(symbol: 'X', at: 1)
+    expect(board.get(at: 1)).to eq 'X'
   end
 
   it 'Retrieves the combinations of the board' do
-    board.put('X', 1)
-    board.put('X', 3)
-    board.put('X', 9)
+    board.put(symbol: 'X', at: 1)
+    board.put(symbol: 'X', at: 3)
+    board.put(symbol: 'X', at: 9)
     expect(board.combinations).to eq [
       ['X', nil, 'X'],
       [nil, nil, nil],
