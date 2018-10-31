@@ -13,13 +13,30 @@ describe 'presenter' do
     end
   end
 
-  let(:displayer) { DisplayLogger.new }
+  class GetOnlyBoard
+    attr_reader :size
+
+    def initialize(size)
+      @size = size
+    end
+
+    def get(position:)
+      position
+    end
+  end
+
+  def default_presenter(displayer)
+    Presenter.new(
+      displayer: displayer,
+      clear: clear
+    )
+  end
 
   let(:clear) { "\e[H\e[2J" }
 
-  let(:size) { 9 }
+  let(:displayer) { DisplayLogger.new }
 
-  let(:flat) { Array.new(9) }
+  let(:board) { GetOnlyBoard.new(3) }
 
   let(:test_message) { 'message' }
 
@@ -34,29 +51,20 @@ describe 'presenter' do
   end
 
   it 'clears the display' do
-    presenter = Presenter.new(
-      displayer: displayer,
-      clear: clear
-    )
-    presenter.present(board: flat, message: test_message)
+    presenter = default_presenter(displayer)
+    presenter.present(board: board, message: test_message)
     expect(displayer.log.first).to eq clear
   end
 
   it 'displays the board' do
-    presenter = Presenter.new(
-      displayer: displayer,
-      clear: clear
-    )
-    presenter.present(board: flat, message: test_message)
+    presenter = default_presenter(displayer)
+    presenter.present(board: board, message: test_message)
     expect(displayer.log.include?(formatted_board_string)).to eq true
   end
 
   it 'displays the message' do
-    presenter = Presenter.new(
-      displayer: displayer,
-      clear: clear
-    )
-    presenter.present(board: flat, message: test_message)
+    presenter = default_presenter(displayer)
+    presenter.present(board: board, message: test_message)
     expect(displayer.log.include?(test_message)).to eq true
   end
 end

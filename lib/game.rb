@@ -24,20 +24,14 @@ class Game
 
   def won
     winning = messages.winning(player: symbols.peek)
-    presenter.present(board: flat, message: winning)
+    presenter.present(board: board, message: winning)
   end
 
   def continue
     symbols.next
     current_player = messages.current(player: symbols.peek)
-    presenter.present(board: flat, message: current_player)
+    presenter.present(board: board, message: current_player)
     board.put(symbol: symbols.peek, at: input.get)
     run
-  end
-
-  def flat
-    (1..board.size**2).to_a.map do |position|
-      board.get(position: position)
-    end
   end
 end

@@ -8,7 +8,8 @@ require './lib/game'
 
 class Main
   def start(io, clear)
-    cells = Array.new(9) { Cell.new }
+    size = 3
+    cells = Array.new(size**2) { Cell.new }
     symbols = %w[O X].cycle
     presenter = Presenter.new(
       displayer: Displayer.new(io),
@@ -17,7 +18,7 @@ class Main
     Game.new(
       presenter: presenter,
       input: Input.new(io),
-      board: Board.new(cells),
+      board: Board.new(cells, size),
       symbols: symbols,
       messages: Messages.new
     ).run

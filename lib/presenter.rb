@@ -5,7 +5,8 @@ class Presenter
   end
 
   def present(board:, message:)
-    [clear, format_board(board), message].each do |render|
+    board = format(flatten(board))
+    [clear, board, message].each do |render|
       displayer.display(render)
     end
   end
@@ -14,7 +15,13 @@ class Presenter
 
   attr_reader :displayer, :clear, :size
 
-  def format_board(board)
+  def flatten(board)
+    (1..board.size**2).to_a.map do |position|
+      board.get(position: position)
+    end
+  end
+
+  def format(board)
     size = Math.sqrt(board.size)
     rows = fill(board).each_slice(size).to_a
     format_builder(rows, size).join("\n")

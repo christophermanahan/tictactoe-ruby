@@ -1,10 +1,11 @@
 require './lib/game'
+require './lib/presenter'
 
-class MovesUntilFullBoard
+class FakeBoard
   attr_accessor :moves_until_full, :latest_move
   attr_reader :size
 
-  def initialize(moves_until_full)
+  def initialize(moves_until_full:)
     @moves_until_full = moves_until_full
     @size = 1
   end
@@ -47,95 +48,58 @@ class FakePresenter
   end
 
   def present(board:, message:)
-    log << board.first
+    log << board.get
     log << message
   end
 end
 
+def default_game(
+  board: FakeBoard.new(moves_until_full: 2),
+  presenter: FakePresenter.new
+)
+  Game.new(
+    board: board,
+    symbols: %w[O X].cycle,
+    messages: FakeMessages.new,
+    input: GetOneInput.new,
+    presenter: presenter
+  )
+end
+
 describe 'game' do
-  let(:symbols) { %w[O X].cycle }
-
-  let(:messages) { FakeMessages.new }
-
-  let(:input) { GetOneInput.new }
-
-  let(:presenter) { FakePresenter.new }
-
   it 'Puts the current players move on the board if it is not full' do
-    board = MovesUntilFullBoard.new(1)
-    game = Game.new(
-      board: board,
-      symbols: symbols,
-      messages: messages,
-      input: input,
-      presenter: presenter
-    )
-    game.run
+    board = FakeBoard.new(moves_until_full: 1)
+    default_game(board: board).run
     expect(board.latest_move).to eq %w[X 1]
   end
 
   it 'Puts the next players move on the board if it is still not full' do
-    board = MovesUntilFullBoard.new(2)
-    game = Game.new(
-      board: board,
-      symbols: symbols,
-      messages: messages,
-      input: input,
-      presenter: presenter
-    )
-    game.run
+    board = FakeBoard.new(moves_until_full: 2)
+    default_game(board: board).run
     expect(board.latest_move).to eq %w[O 1]
   end
 
   it 'Displays the first player message' do
-    board = MovesUntilFullBoard.new(2)
-    game = Game.new(
-      board: board,
-      symbols: symbols,
-      messages: messages,
-      input: input,
-      presenter: presenter
-    )
-    game.run
+    presenter = FakePresenter.new
+    default_game(presenter: presenter).run
     expect(presenter.log.include?('current X')).to eq true
   end
 
   it 'Displays the second player message' do
-    board = MovesUntilFullBoard.new(2)
-    game = Game.new(
-      board: board,
-      symbols: symbols,
-      messages: messages,
-      input: input,
-      presenter: presenter
-    )
-    game.run
+    presenter = FakePresenter.new
+    default_game(presenter: presenter).run
     expect(presenter.log.include?('current O')).to eq true
   end
 
   it 'Displays the board' do
-    board = MovesUntilFullBoard.new(2)
-    game = Game.new(
-      board: board,
-      symbols: symbols,
-      messages: messages,
-      input: input,
-      presenter: presenter
-    )
-    game.run
+    presenter = FakePresenter.new
+    default_game(presenter: presenter).run
     expect(presenter.log.include?('board')).to eq true
   end
 
   it 'Displays the winning player' do
-    board = MovesUntilFullBoard.new(3)
-    game = Game.new(
-      board: board,
-      symbols: symbols,
-      messages: messages,
-      input: input,
-      presenter: presenter
-    )
-    game.run
-    expect(presenter.log.last).to eq 'winning X'
+    presenter = FakePresenter.new
+    default_game(presenter: presenter).run
+    expect(presenter.log.last).to eq 'winning O'
   end
 end
