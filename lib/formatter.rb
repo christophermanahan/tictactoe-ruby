@@ -6,7 +6,8 @@ class Formatter
 
   def format(board)
     flattened = flatten(board)
-    colored = color_and_replace_nil(flattened)
+    symbols_or_positions = nil_to_position(flattened)
+    colored = color(symbols_or_positions)
     rows = colored.each_slice(board.size).to_a
     rows_and_dividers(rows).join("\n")
   end
@@ -21,15 +22,21 @@ class Formatter
     end
   end
 
-  def color_and_replace_nil(flattened)
+  def nil_to_position(flattened)
     flattened.map.with_index do |symbol, position|
-      case symbol
+      symbol.nil? ? convert(position) : symbol
+    end
+  end
+
+  def color(symbols_or_positions)
+    symbols_or_positions.map do |symbol_or_position|
+      case symbol_or_position
       when symbols.first
-        colorizer.yellow(symbol)
+        colorizer.yellow(symbol_or_position)
       when symbols.last
-        colorizer.cyan(symbol)
+        colorizer.cyan(symbol_or_position)
       else
-        colorizer.magenta(convert(position))
+        colorizer.magenta(symbol_or_position)
       end
     end
   end
