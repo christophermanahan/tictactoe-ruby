@@ -24,12 +24,12 @@ class Formatter
   def color_and_replace_nil(flattened)
     flattened.map.with_index do |symbol, position|
       case symbol
-      when nil
-        colorizer.magenta(convert(position))
       when symbols.first
         colorizer.yellow(symbol)
       when symbols.last
         colorizer.cyan(symbol)
+      else
+        colorizer.magenta(convert(position))
       end
     end
   end
