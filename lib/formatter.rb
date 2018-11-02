@@ -1,12 +1,20 @@
 class Formatter
+  def initialize(colorizer:, symbols:)
+    @colorizer = colorizer
+    @symbols = symbols
+  end
+
   def format(board)
     flattened = flatten(board)
-    replaced = replace_nil_with_position(flattened)
-    rows = replaced.each_slice(board.size).to_a
+    symbols_or_positions = nil_to_position(flattened)
+    colored = color(symbols_or_positions)
+    rows = colored.each_slice(board.size).to_a
     rows_and_dividers(rows).join("\n")
   end
 
   private
+
+  attr_reader :colorizer, :symbols
 
   def flatten(board)
     (1..board.size**2).to_a.map do |position|
@@ -14,9 +22,22 @@ class Formatter
     end
   end
 
-  def replace_nil_with_position(flattened)
+  def nil_to_position(flattened)
     flattened.map.with_index do |symbol, position|
-      symbol.nil? ? position + 1 : symbol
+      symbol.nil? ? convert(position) : symbol
+    end
+  end
+
+  def color(symbols_or_positions)
+    symbols_or_positions.map do |symbol_or_position|
+      case symbol_or_position
+      when symbols.first
+        colorizer.yellow(symbol_or_position)
+      when symbols.last
+        colorizer.cyan(symbol_or_position)
+      else
+        colorizer.magenta(symbol_or_position)
+      end
     end
   end
 
@@ -34,5 +55,9 @@ class Formatter
 
   def bordered_row(row)
     "|  #{row.join('  |  ')}  |"
+  end
+
+  def convert(position)
+    (position + 1).to_s
   end
 end
