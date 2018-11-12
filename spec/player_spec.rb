@@ -3,7 +3,7 @@ require './lib/player'
 describe 'player' do
   class StubMoveMaker
     def get
-      1
+      '1'
     end
   end
 
@@ -15,7 +15,7 @@ describe 'player' do
   end
 
   it 'can make a move' do
-    expect(player.make_move).to eq 1
+    expect(player.make_move).to eq '1'
   end
 
   it 'has a symbol' do

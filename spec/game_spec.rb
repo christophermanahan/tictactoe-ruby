@@ -1,7 +1,7 @@
 require './lib/game'
 require './lib/presenter'
 
-class FakeBoard
+class MockBoard
   attr_accessor :moves_until_full, :latest_move
   attr_reader :size
 
@@ -24,7 +24,7 @@ class FakeBoard
   end
 end
 
-class FakeMessages
+class SpyMessages
   def current(player:)
     "current #{player}"
   end
@@ -34,13 +34,19 @@ class FakeMessages
   end
 end
 
-class GetOneInput
-  def get
+class StubPlayer
+  attr_reader :symbol
+
+  def initialize(symbol)
+    @symbol = symbol
+  end
+
+  def make_move
     '1'
   end
 end
 
-class FakePresenter
+class SpyPresenter
   attr_accessor :log
 
   def initialize
@@ -54,51 +60,50 @@ class FakePresenter
 end
 
 def default_game(
-  board: FakeBoard.new(moves_until_full: 2),
-  presenter: FakePresenter.new
+  board: MockBoard.new(moves_until_full: 2),
+  presenter: SpyPresenter.new
 )
   Game.new(
     board: board,
-    symbols: %w[O X].cycle,
-    messages: FakeMessages.new,
-    input: GetOneInput.new,
+    players: [StubPlayer.new('O'), StubPlayer.new('X')].cycle,
+    messages: SpyMessages.new,
     presenter: presenter
   )
 end
 
 describe 'game' do
-  it 'Puts the current players move on the board if it is not full' do
-    board = FakeBoard.new(moves_until_full: 1)
+  it 'puts the current players move on the board if it is not full' do
+    board = MockBoard.new(moves_until_full: 1)
     default_game(board: board).run
     expect(board.latest_move).to eq %w[X 1]
   end
 
-  it 'Puts the next players move on the board if it is still not full' do
-    board = FakeBoard.new(moves_until_full: 2)
+  it 'puts the next players move on the board if it is still not full' do
+    board = MockBoard.new(moves_until_full: 2)
     default_game(board: board).run
     expect(board.latest_move).to eq %w[O 1]
   end
 
-  it 'Displays the first player message' do
-    presenter = FakePresenter.new
+  it 'displays the first player message' do
+    presenter = SpyPresenter.new
     default_game(presenter: presenter).run
     expect(presenter.log.include?('current X')).to eq true
   end
 
-  it 'Displays the second player message' do
-    presenter = FakePresenter.new
+  it 'displays the second player message' do
+    presenter = SpyPresenter.new
     default_game(presenter: presenter).run
     expect(presenter.log.include?('current O')).to eq true
   end
 
-  it 'Displays the board' do
-    presenter = FakePresenter.new
+  it 'displays the board' do
+    presenter = SpyPresenter.new
     default_game(presenter: presenter).run
     expect(presenter.log.include?('board')).to eq true
   end
 
-  it 'Displays the winning player' do
-    presenter = FakePresenter.new
+  it 'displays the winning player' do
+    presenter = SpyPresenter.new
     default_game(presenter: presenter).run
     expect(presenter.log.last).to eq 'winning O'
   end
