@@ -24,21 +24,13 @@ class MockBoard
   end
 end
 
-class SpyMessages
-  def current(player:)
-    "current #{player}"
-  end
-
-  def winning(player:)
-    "winning #{player}"
-  end
-end
-
 class StubPlayer
-  attr_reader :symbol
+  attr_reader :symbol, :move_message, :win_message
 
   def initialize(symbol)
     @symbol = symbol
+    @move_message = "current #{symbol}"
+    @win_message = "winning #{symbol}"
   end
 
   def make_move
@@ -66,7 +58,6 @@ def default_game(
   Game.new(
     board: board,
     players: [StubPlayer.new('O'), StubPlayer.new('X')].cycle,
-    messages: SpyMessages.new,
     presenter: presenter
   )
 end

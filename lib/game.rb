@@ -1,8 +1,7 @@
 class Game
-  def initialize(board:, players:, messages:, presenter:)
+  def initialize(board:, players:, presenter:)
     @board = board
     @players = players
-    @messages = messages
     @presenter = presenter
   end
 
@@ -22,14 +21,12 @@ class Game
   end
 
   def won
-    winning = messages.winning(player: players.peek.symbol)
-    presenter.present(board: board, message: winning)
+    presenter.present(board: board, message: players.peek.win_message)
   end
 
   def continue
     players.next
-    current_player = messages.current(player: players.peek.symbol)
-    presenter.present(board: board, message: current_player)
+    presenter.present(board: board, message: players.peek.move_message)
     board.put(symbol: players.peek.symbol, at: players.peek.make_move)
     run
   end

@@ -7,10 +7,16 @@ describe 'player' do
     end
   end
 
+  let(:move_message) { 'move' }
+
+  let(:win_message) { 'win' }
+
   let(:player) do
     Player.new(
       move_maker: StubMoveMaker.new,
-      symbol: 'X'
+      symbol: 'X',
+      move_message: move_message,
+      win_message: win_message
     )
   end
 
@@ -20,5 +26,13 @@ describe 'player' do
 
   it 'has a symbol' do
     expect(player.symbol).to eq 'X'
+  end
+
+  it 'has a move message' do
+    expect(player.move_message).to eq move_message
+  end
+
+  it 'has a win message' do
+    expect(player.win_message).to eq win_message
   end
 end
