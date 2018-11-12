@@ -11,7 +11,7 @@ class Game
 
   private
 
-  attr_reader :board, :players, :messages, :presenter
+  attr_reader :board, :players, :presenter
 
   def win?
     board.combinations.any? do |in_a_row|
