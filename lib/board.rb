@@ -10,6 +10,11 @@ class Board
     rows + columns + diagonals
   end
 
+  def available_positions
+    positions = symbols.each_index.select { |i| symbols[i].nil? }
+    positions.map { |position| position + 1 }
+  end
+
   def get(at:)
     target_cell = cells[convert(position: at)]
     target_cell.symbol

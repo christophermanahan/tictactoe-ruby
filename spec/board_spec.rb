@@ -26,4 +26,9 @@ describe 'board' do
       ['X', nil, nil]
     ]
   end
+
+  it 'Retrieves the available board positions' do
+    board.put(symbol: 'X', at: 1)
+    expect(board.available_positions).to eq [2, 3, 4, 5, 6, 7, 8, 9]
+  end
 end
