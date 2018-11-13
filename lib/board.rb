@@ -10,6 +10,10 @@ class Board
     rows + columns + diagonals
   end
 
+  def full?
+    cells.all?(&:symbol)
+  end
+
   def available_positions
     positions = symbols.each_index.select { |i| symbols[i].nil? }
     positions.map { |position| position + 1 }

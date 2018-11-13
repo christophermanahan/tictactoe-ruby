@@ -1,17 +1,7 @@
 class Game
-  def initialize(board:, players:, presenter:)
+  def initialize(board)
     @board = board
-    @players = players
-    @presenter = presenter
   end
-
-  def run
-    win? ? won : continue
-  end
-
-  private
-
-  attr_reader :board, :players, :presenter
 
   def win?
     board.combinations.any? do |in_a_row|
@@ -20,14 +10,19 @@ class Game
     end
   end
 
-  def won
-    presenter.present(board: board, message: players.peek.win_message)
+  def tie?
+    !win? && board.full?
   end
 
-  def continue
-    players.next
-    presenter.present(board: board, message: players.peek.move_message)
-    board.put(symbol: players.peek.symbol, at: players.peek.make_move)
-    run
+  def move(symbol:, to:)
+    board.put(symbol: symbol, at: to)
   end
+
+  def available_moves
+    board.available_positions
+  end
+
+  private
+
+  attr_reader :board
 end
