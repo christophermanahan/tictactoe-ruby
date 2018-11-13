@@ -1,5 +1,5 @@
 class Player
-  attr_reader :symbol, :move_message, :win_message
+  attr_reader :symbol
 
   def initialize(move:, symbol:)
     @move = move
