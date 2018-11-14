@@ -9,6 +9,10 @@ describe 'game' do
   end
 
   class ContinueBoard
+    def full?
+      false
+    end
+
     def combinations
       [['X', nil, 'X']]
     end
@@ -55,6 +59,16 @@ describe 'game' do
   it 'can check if a game is a tie' do
     game = Game.new(TieBoard.new)
     expect(game.tie?).to eq true
+  end
+
+  it 'can check if a game is not over' do
+    game = Game.new(ContinueBoard.new)
+    expect(game.over?).to eq false
+  end
+
+  it 'can check if a game is over' do
+    game = Game.new(TieBoard.new)
+    expect(game.over?).to eq true
   end
 
   it 'can place a move on a board' do

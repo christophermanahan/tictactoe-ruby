@@ -3,6 +3,10 @@ class Game
     @board = board
   end
 
+  def over?
+    board.full?
+  end
+
   def win?
     board.combinations.any? do |in_a_row|
       unique = in_a_row.uniq
