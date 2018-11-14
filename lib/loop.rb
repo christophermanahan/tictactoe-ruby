@@ -22,7 +22,7 @@ class Loop
   def play
     players.next
     present
-    players.peek.play(game)
+    self.game = players.peek.play(game)
   end
 
   def continue?

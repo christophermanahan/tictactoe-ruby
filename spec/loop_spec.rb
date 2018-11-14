@@ -3,6 +3,7 @@ require './lib/loop'
 describe 'loop' do
   class MockGame
     attr_accessor :turns
+
     def initialize(turns)
       @turns = turns
     end
@@ -12,7 +13,6 @@ describe 'loop' do
     end
 
     def over?
-      self.turns -= 1
       turns.zero?
     end
   end
@@ -27,6 +27,7 @@ describe 'loop' do
 
     def play(game)
       self.log = [game.string, symbol]
+      MockGame.new(game.turns - 1)
     end
   end
 
