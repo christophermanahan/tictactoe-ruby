@@ -6,19 +6,15 @@ require './lib/player'
 require './lib/colorizer'
 require './lib/formatter'
 require './lib/presenter'
+require './lib/messages'
 require './lib/game'
+require './lib/loop'
 
 class Main
-  def start(
-    io:,
-    clear_console:,
-    default_board_size:,
-    default_symbols:,
-    default_move_message_prefix:,
-    default_win_message_suffix:
-  )
-
+  def start(io:, clear_console:, default_board_size:, default_symbols:)
     cells = Array.new(default_board_size**2) { Cell.new }
+
+    game = Game.new(Board.new(cells, default_board_size))
 
     formatter = Formatter.new(
       colorizer: Colorizer.new,
@@ -28,30 +24,30 @@ class Main
     presenter = Presenter.new(
       displayer: Displayer.new(io),
       clear: clear_console,
-      formatter: formatter
+      formatter: formatter,
+      messages: Messages.new
     )
 
     input = Input.new(io)
 
     players = [
-      Player.new(
-        move_maker: input,
-        symbol: default_symbols.first,
-        move_message: default_move_message_prefix + default_symbols.first,
-        win_message: default_symbols.first + default_win_message_suffix
-      ),
-      Player.new(
-        move_maker: input,
-        symbol: default_symbols.last,
-        move_message: default_move_message_prefix + default_symbols.last,
-        win_message: default_symbols.last + default_win_message_suffix
-      )
+      player(input, default_symbols.first),
+      player(input, default_symbols.last)
     ].cycle
 
-    Game.new(
-      board: Board.new(cells, default_board_size),
+    Loop.new(
+      game: game,
       players: players,
       presenter: presenter
     ).run
+  end
+
+  private
+
+  def player(move, symbol)
+    Player.new(
+      move: move,
+      symbol: symbol
+    )
   end
 end
