@@ -14,8 +14,8 @@ describe 'presenter' do
   end
 
   class StubFormatter
-    def format(*)
-      'game'
+    def format(board)
+      "|#{board}|"
     end
   end
 
@@ -33,7 +33,13 @@ describe 'presenter' do
     end
   end
 
-  class WonGame
+  class BoardGame
+    def board
+      'board'
+    end
+  end
+
+  class WonGame < BoardGame
     def win?
       true
     end
@@ -43,7 +49,7 @@ describe 'presenter' do
     end
   end
 
-  class TieGame
+  class TieGame < BoardGame
     def win?
       false
     end
@@ -53,7 +59,7 @@ describe 'presenter' do
     end
   end
 
-  class ContinueGame
+  class ContinueGame < BoardGame
     def win?
       false
     end
@@ -90,10 +96,10 @@ describe 'presenter' do
     expect(displayer.log.first).to eq clear
   end
 
-  it 'displays the formatted game' do
+  it 'displays the formatted board' do
     presenter = default_presenter(displayer)
     presenter.present(game: ContinueGame.new, player: player)
-    expect(displayer.log.include?('game')).to eq true
+    expect(displayer.log.include?('|board|')).to eq true
   end
 
   it 'displays the current player prompt message if the game is not over' do

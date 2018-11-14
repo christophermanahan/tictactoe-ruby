@@ -7,8 +7,8 @@ class Presenter
   end
 
   def present(game:, player:)
-    [clear, formatter.format(game), message(game, player)].each do |render|
-      displayer.display(render)
+    [clear, formatter.format(game.board), message(game, player)].each do |out|
+      displayer.display(out)
     end
   end
 

@@ -40,6 +40,12 @@ describe 'game' do
     end
   end
 
+  class SizeBoard
+    def size
+      3
+    end
+  end
+
   class AvailableBoard
     def available_positions
       'available'
@@ -74,11 +80,6 @@ describe 'game' do
   it 'can place a move on a board' do
     game = Game.new(PutBoard.new)
     expect(game.move(symbol: 'X', to: '1')).to eq 'X1'
-  end
-
-  it 'can get the symbol at a specific position' do
-    game = Game.new(GetBoard.new)
-    expect(game.symbol(at: '1')).to eq '1'
   end
 
   it 'can get the available moves' do

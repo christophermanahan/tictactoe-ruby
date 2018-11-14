@@ -33,8 +33,8 @@ describe 'loop' do
   class StubPresenter
     attr_accessor :log
 
-    def present(game:, player:)
-      self.log = [game.string, player.symbol]
+    def present(game:, **)
+      self.log = game.string
     end
   end
 
@@ -54,16 +54,16 @@ describe 'loop' do
 
   it 'presents the game' do
     default_loop(MockGame.new(1), [player1, player2].cycle, presenter).run
-    expect(presenter.log).to eq %w[game X]
+    expect(presenter.log).to eq 'game'
   end
 
   it 'requests a player to play the game if it is not over' do
-    default_loop(MockGame.new(1), [player1, player2].cycle, presenter).run
+    default_loop(MockGame.new(2), [player1, player2].cycle, presenter).run
     expect(player1.log).to eq %w[game X]
   end
 
   it 'requests the next player to play the game if it is still not over' do
-    default_loop(MockGame.new(2), [player1, player2].cycle, presenter).run
+    default_loop(MockGame.new(3), [player1, player2].cycle, presenter).run
     expect(player2.log).to eq %w[game O]
   end
 end

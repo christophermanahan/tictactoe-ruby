@@ -1,10 +1,12 @@
 class Game
+  attr_reader :board
+
   def initialize(board)
     @board = board
   end
 
   def over?
-    board.full?
+    win? || tie?
   end
 
   def win?
@@ -22,15 +24,7 @@ class Game
     board.put(symbol: symbol, at: to)
   end
 
-  def symbol(at:)
-    board.get(at: at)
-  end
-
   def available_moves
     board.available_positions
   end
-
-  private
-
-  attr_reader :board
 end

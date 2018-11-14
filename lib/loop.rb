@@ -6,7 +6,6 @@ class Loop
   end
 
   def run
-    present
     play
     continue?
   end
@@ -20,11 +19,13 @@ class Loop
   end
 
   def play
-    players.peek.play(game)
     players.next
+    present
+    players.peek.play(game)
   end
 
   def continue?
+    present
     run unless game.over?
   end
 end
