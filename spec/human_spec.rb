@@ -1,17 +1,24 @@
 require './lib/human'
 
 describe 'human' do
-  class DummyGame
-  end
-
   class StubInput
     def get
       '1'
     end
   end
 
-  it 'gets a move' do
-    human = Human.new(StubInput.new)
-    expect(human.move(DummyGame.new)).to eq '1'
+  class StubGame
+    def move(symbol:, to:)
+      symbol + to
+    end
+  end
+
+  it 'play a turn of the game' do
+    human = Human.new(
+      input: StubInput.new,
+      symbol: 'X'
+    )
+    game = StubGame.new
+    expect(human.play(game)).to eq 'X1'
   end
 end

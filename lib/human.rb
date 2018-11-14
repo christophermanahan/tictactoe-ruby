@@ -1,11 +1,13 @@
 class Human
-  def initialize(input)
+  attr_reader :symbol
+
+  def initialize(input:, symbol:)
     @input = input
+    @symbol = symbol
   end
 
-  def move(_game)
-    # Perform validation here using game, rename input to reflect
-    input.get
+  def play(game)
+    game.move(symbol: symbol, to: input.get)
   end
 
   private

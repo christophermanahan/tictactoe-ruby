@@ -2,7 +2,7 @@ require './lib/cell'
 require './lib/displayer'
 require './lib/board'
 require './lib/input'
-require './lib/player'
+require './lib/human'
 require './lib/colorizer'
 require './lib/formatter'
 require './lib/presenter'
@@ -12,7 +12,7 @@ require './lib/loop'
 
 class Main
   def start(io:, clear_console:, default_board_size:, default_symbols:)
-    cells = Array.new(default_board_size**2) { Cell.new }
+    cells = Array.new(default_board_size**2) { Cell.new(nil) }
 
     game = Game.new(Board.new(cells, default_board_size))
 
@@ -44,9 +44,9 @@ class Main
 
   private
 
-  def player(make, symbol)
-    Player.new(
-      make: make,
+  def player(input, symbol)
+    Human.new(
+      input: input,
       symbol: symbol
     )
   end

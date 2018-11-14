@@ -12,7 +12,8 @@ class Loop
 
   private
 
-  attr_reader :game, :players, :presenter
+  attr_reader :players, :presenter
+  attr_accessor :game
 
   def present
     presenter.present(game: game, player: players.peek)
