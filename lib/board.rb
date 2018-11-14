@@ -15,18 +15,19 @@ class Board
   end
 
   def available_positions
-    positions = symbols.each_index.select { |i| symbols[i].nil? }
+    positions = cells.each_index.select { |i| cells[i].empty? }
     positions.map { |position| position + 1 }
   end
 
   def get(at:)
-    target_cell = cells[convert(position: at)]
-    target_cell.symbol
+    cells[convert(position: at)].symbol
   end
 
   def put(symbol:, at:)
-    target_cell = cells[convert(position: at)]
-    target_cell.fill(symbol)
+    position = convert(position: at)
+    replace = cells[position].fill(symbol)
+    replaced = cells.map.with_index { |cell, i| i == position ? replace : cell }
+    Board.new(replaced, size)
   end
 
   private

@@ -79,7 +79,7 @@ describe 'game' do
 
   it 'can place a move on a board' do
     game = Game.new(PutBoard.new)
-    expect(game.move(symbol: 'X', to: '1')).to eq 'X1'
+    expect(game.move(symbol: 'X', to: '1').board).to eq 'X1'
   end
 
   it 'can get the available moves' do

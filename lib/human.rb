@@ -3,7 +3,7 @@ class Human
     @input = input
   end
 
-  def move(game)
+  def move(_game)
     # Perform validation here using game, rename input to reflect
     input.get
   end

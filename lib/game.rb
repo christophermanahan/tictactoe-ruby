@@ -21,7 +21,7 @@ class Game
   end
 
   def move(symbol:, to:)
-    board.put(symbol: symbol, at: to)
+    Game.new(board.put(symbol: symbol, at: to))
   end
 
   def available_moves
