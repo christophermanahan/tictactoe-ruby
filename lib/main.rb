@@ -44,9 +44,9 @@ class Main
 
   private
 
-  def player(move, symbol)
+  def player(make, symbol)
     Player.new(
-      move: move,
+      make: make,
       symbol: symbol
     )
   end

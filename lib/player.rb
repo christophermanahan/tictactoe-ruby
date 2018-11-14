@@ -1,16 +1,16 @@
 class Player
   attr_reader :symbol
 
-  def initialize(move:, symbol:)
-    @move = move
+  def initialize(make:, symbol:)
+    @make = make
     @symbol = symbol
   end
 
   def play(game)
-    game.move(symbol: symbol, to: move.get)
+    game.move(symbol: symbol, to: make.move(game))
   end
 
   private
 
-  attr_reader :move
+  attr_reader :make
 end

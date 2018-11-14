@@ -1,8 +1,8 @@
 require './lib/player'
 
 describe 'player' do
-  class StubMove
-    def get
+  class StubMake
+    def move(*)
       '1'
     end
   end
@@ -15,7 +15,7 @@ describe 'player' do
 
   it 'play a turn of the game' do
     player = Player.new(
-      move: StubMove.new,
+      make: StubMake.new,
       symbol: 'X'
     )
     game = StubGame.new
