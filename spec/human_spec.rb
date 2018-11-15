@@ -13,7 +13,7 @@ describe 'human' do
     end
   end
 
-  it 'play a turn of the game' do
+  it 'plays a turn of the game' do
     human = Human.new(
       input: StubInput.new,
       symbol: 'X'

@@ -3,6 +3,8 @@ require './lib/displayer'
 require './lib/board'
 require './lib/input'
 require './lib/human'
+require './lib/pauser'
+require './lib/computer'
 require './lib/colorizer'
 require './lib/formatter'
 require './lib/presenter'
@@ -30,9 +32,18 @@ class Main
 
     input = Input.new(io)
 
+    pauser = Pauser.new(->(time) { sleep(time) }, 2)
+
     players = [
-      player(input, default_symbols.first),
-      player(input, default_symbols.last)
+      Computer.new(
+        symbol: default_symbols.last,
+        opponent: default_symbols.first,
+        pauser: pauser
+      ),
+      Human.new(
+        input: input,
+        symbol: default_symbols.first
+      )
     ].cycle
 
     Loop.new(
@@ -40,14 +51,5 @@ class Main
       players: players,
       presenter: presenter
     ).run
-  end
-
-  private
-
-  def player(input, symbol)
-    Human.new(
-      input: input,
-      symbol: symbol
-    )
   end
 end
