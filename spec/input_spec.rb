@@ -7,11 +7,29 @@ class MockIO
 end
 
 describe 'input' do
-  let(:input) do
-    Input.new(MockIO.new)
+  class MockIO
+    attr_accessor :called
+
+    def gets
+      true
+    end
+
+    def iflush
+      self.called = true
+    end
   end
 
-  it 'Receives input from the console' do
-    expect(input.get).to eq 1
+  let(:io) { MockIO.new }
+
+  context 'receives clean input'
+  let(:input) { Input.new(io) }
+
+  it 'flushes input' do
+    input.get
+    expect(io.called).to eq true
+  end
+
+  it 'receives input' do
+    expect(input.get).to eq true
   end
 end

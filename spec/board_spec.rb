@@ -26,16 +26,7 @@ describe 'board' do
   end
 
   it 'can check if a board is full' do
-    board = Board.new(Array.new(9) { Cell.new(nil) }, 3)
-    board = board.put(symbol: 'X', at: 1)
-    board = board.put(symbol: 'X', at: 2)
-    board = board.put(symbol: 'X', at: 3)
-    board = board.put(symbol: 'X', at: 4)
-    board = board.put(symbol: 'X', at: 5)
-    board = board.put(symbol: 'X', at: 6)
-    board = board.put(symbol: 'X', at: 7)
-    board = board.put(symbol: 'X', at: 8)
-    board = board.put(symbol: 'X', at: 9)
+    board = Board.new(Array.new(9) { Cell.new('X') }, 3)
     expect(board.full?).to eq true
   end
 
