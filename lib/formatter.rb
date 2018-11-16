@@ -32,11 +32,11 @@ class Formatter
     symbols_or_positions.map do |symbol_or_position|
       case symbol_or_position
       when symbols.first
-        colorizer.yellow(symbol_or_position)
+        colorizer.symbol_1(symbol_or_position)
       when symbols.last
-        colorizer.cyan(symbol_or_position)
+        colorizer.symbol_2(symbol_or_position)
       else
-        colorizer.magenta(symbol_or_position)
+        colorizer.position(symbol_or_position)
       end
     end
   end

@@ -13,15 +13,15 @@ class NilOnlyBoard
 end
 
 class FakeColorizer
-  def magenta(string)
+  def symbol_1(string)
     string
   end
 
-  def cyan(string)
+  def symbol_2(string)
     string
   end
 
-  def yellow(string)
+  def position(string)
     string
   end
 end
