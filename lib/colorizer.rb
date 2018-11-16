@@ -3,15 +3,15 @@ class Colorizer
     @color_count = color_count
   end
 
-  def blue(string)
+  def symbol_1(string)
     colorize(string, 34)
   end
 
-  def cyan(string)
+  def symbol_2(string)
     colorize(string, 36)
   end
 
-  def yellow(string)
+  def position(string)
     colorize(string, 33)
   end
 

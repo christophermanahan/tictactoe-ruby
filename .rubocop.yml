@@ -8,8 +8,7 @@ Metrics/MethodLength:
     - 'lib/main.rb' 
 
 Metrics/LineLength:
-  Exclude:
-    - 'lib/main.rb'
+  Max: 120
 
 Metrics/ParameterLists:
   Exclude:
