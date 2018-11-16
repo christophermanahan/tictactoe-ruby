@@ -13,13 +13,13 @@ require './lib/game'
 require './lib/loop'
 
 class Main
-  def start(io:, clear_console:, color_count:, default_board_size:, default_symbols:)
+  def start(io:, clear_console:, color_supported:, default_board_size:, default_symbols:)
     cells = Array.new(default_board_size**2) { Cell.new(nil) }
 
     game = Game.new(Board.new(cells, default_board_size))
 
     formatter = Formatter.new(
-      colorizer: Colorizer.new(color_count),
+      colorizer: Colorizer.new(color_supported, ->(string, code) { "\e[#{code}m#{string}\e[0m" }),
       symbols: default_symbols
     )
 
