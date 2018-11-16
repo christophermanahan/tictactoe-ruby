@@ -1,9 +1,13 @@
 class Messages
-  def current(player:)
-    "Player #{player} choose a position!"
+  def winning(player)
+    "#{player} has won"
   end
 
-  def winning(player:)
-    "Player #{player} wins!"
+  def tied
+    'The game ended in a tie'
+  end
+
+  def prompt(player)
+    "Please make a selection for #{player}"
   end
 end

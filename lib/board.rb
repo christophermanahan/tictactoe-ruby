@@ -10,14 +10,24 @@ class Board
     rows + columns + diagonals
   end
 
+  def full?
+    cells.all?(&:symbol)
+  end
+
+  def available_positions
+    positions = cells.each_index.select { |i| cells[i].empty? }
+    positions.map { |position| position + 1 }
+  end
+
   def get(at:)
-    target_cell = cells[convert(position: at)]
-    target_cell.symbol
+    cells[convert(position: at)].symbol
   end
 
   def put(symbol:, at:)
-    target_cell = cells[convert(position: at)]
-    target_cell.fill(symbol)
+    position = convert(position: at)
+    replace = cells[position].fill(symbol)
+    replaced = cells.map.with_index { |cell, i| i == position ? replace : cell }
+    Board.new(replaced, size)
   end
 
   private

@@ -1,8 +1,12 @@
 class Cell
-  attr_accessor :symbol
+  attr_reader :symbol
+
+  def initialize(symbol)
+    @symbol = symbol
+  end
 
   def fill(symbol)
-    self.symbol = symbol
+    Cell.new(symbol)
   end
 
   def empty?

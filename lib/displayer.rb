@@ -3,8 +3,8 @@ class Displayer
     @io = io
   end
 
-  def display(formatted_string)
-    io.puts(formatted_string)
+  def display(out)
+    io.puts(out)
   end
 
   private

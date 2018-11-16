@@ -1,13 +1,10 @@
 require './lib/cell.rb'
 
 describe 'cell' do
-  let(:cell) do
-    Cell.new
-  end
+  let(:cell) { Cell.new(nil) }
 
   it 'Sets the symbol' do
-    cell.fill('X')
-    expect(cell.symbol).to eq 'X'
+    expect(cell.fill('X').symbol).to eq 'X'
   end
 
   it 'Is true if a symbol has not been set' do
@@ -15,7 +12,6 @@ describe 'cell' do
   end
 
   it 'Is false if a symbol has been set' do
-    cell.fill('X')
-    expect(cell.empty?).to eq false
+    expect(cell.fill('X').empty?).to eq false
   end
 end
