@@ -1,13 +1,29 @@
 class Colorizer
+  def initialize(color_count)
+    @color_count = color_count
+  end
+
   def magenta(string)
-    "\e[35m#{string}\e[0m"
+    colorize(string, 35)
   end
 
   def cyan(string)
-    "\e[36m#{string}\e[0m"
+    colorize(string, 36)
   end
 
   def yellow(string)
-    "\e[33m#{string}\e[0m"
+    colorize(string, 33)
+  end
+
+  private
+
+  attr_reader :color_count
+
+  def supported?
+    color_count >= 8
+  end
+
+  def colorize(string, code)
+    supported? ? "\e[#{code}m#{string}\e[0m" : string
   end
 end
