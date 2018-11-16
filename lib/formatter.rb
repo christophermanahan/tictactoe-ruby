@@ -36,7 +36,7 @@ class Formatter
       when symbols.last
         colorizer.cyan(symbol_or_position)
       else
-        colorizer.magenta(symbol_or_position)
+        colorizer.blue(symbol_or_position)
       end
     end
   end

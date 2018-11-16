@@ -13,7 +13,7 @@ class NilOnlyBoard
 end
 
 class FakeColorizer
-  def magenta(string)
+  def blue(string)
     string
   end
 

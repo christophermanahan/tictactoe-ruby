@@ -3,8 +3,8 @@ class Colorizer
     @color_count = color_count
   end
 
-  def magenta(string)
-    colorize(string, 35)
+  def blue(string)
+    colorize(string, 34)
   end
 
   def cyan(string)

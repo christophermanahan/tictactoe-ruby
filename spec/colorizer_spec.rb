@@ -8,11 +8,11 @@ describe 'colorizer' do
   let(:test) { 'test' }
 
   it 'only colors a string if supported' do
-    expect(colorizer_unsupported.magenta(test)).to eq test
+    expect(colorizer_unsupported.blue(test)).to eq test
   end
 
-  it 'colors a string magenta if supported' do
-    expect(colorizer_supported.magenta(test)).to eq "\e[35m#{test}\e[0m"
+  it 'colors a string blue if supported' do
+    expect(colorizer_supported.blue(test)).to eq "\e[34m#{test}\e[0m"
   end
 
   it 'colors a string yellow if supported' do
