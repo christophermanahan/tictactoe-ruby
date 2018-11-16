@@ -1,12 +1,10 @@
 require './lib/colorizer'
 
 describe 'colorizer' do
-  let(:colorize_function) { ->(string, code) { "\e[#{code}m#{string}\e[0m" } }
-
   let(:test) { 'test' }
 
   context 'colors not supported' do
-    let(:colorizer_unsupported) { Colorizer.new(false, colorize_function) }
+    let(:colorizer_unsupported) { Colorizer.new(1) }
 
     it 'only colors a string if supported' do
       expect(colorizer_unsupported.position(test)).to eq test
@@ -14,7 +12,7 @@ describe 'colorizer' do
   end
 
   context 'colors supported' do
-    let(:colorizer_supported) { Colorizer.new(true, colorize_function) }
+    let(:colorizer_supported) { Colorizer.new(8) }
 
     it 'colors symbol_1 if supported' do
       expect(colorizer_supported.symbol_1(test)).to eq "\e[34m#{test}\e[0m"

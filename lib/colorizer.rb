@@ -1,7 +1,6 @@
 class Colorizer
-  def initialize(supported, colorize_function)
-    @supported = supported
-    @colorize_function = colorize_function
+  def initialize(color_count)
+    @color_count = color_count
   end
 
   def symbol_1(string)
@@ -18,9 +17,18 @@ class Colorizer
 
   private
 
-  attr_reader :supported, :colorize_function
+  attr_reader :color_count, :colorize_function
 
   def colorize(string, code)
-    supported ? colorize_function.call(string, code) : string
+    supported? ? ansi_wrapper(string, code) : string
+  end
+
+  def supported?
+    color_supported_threshold = 1
+    color_count > color_supported_threshold
+  end
+
+  def ansi_wrapper(string, code)
+    "\e[#{code}m#{string}\e[0m"
   end
 end
